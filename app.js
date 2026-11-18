@@ -22,14 +22,22 @@ function credit(p){
   if(p.photo?.local)return `<span class="photo-credit">Фото: ${esc(p.photo.author)}</span>`;
   return p.photo?`<span class="photo-credit"><a href="${link(p.photo.source)}" target="_blank" rel="noopener">${esc(p.photo.attribution||p.photo.author)}</a> · <a href="${link(p.photo.license)}" target="_blank" rel="noopener">${esc(p.photo.license_label||"CC BY-SA 4.0")}</a></span>`:`<span class="no-photo">Фотографии пока нет</span>`;
 }
-function card(p,group=false){
+function card(p){
   current=p;
-  return `<article class="card" data-cat="${esc(p.category)}"><div class="card-bg"></div>${photo(p)}
-    <div class="card-top"><span class="tag">${cats[p.category]}</span>${btn("details","Подробнее ↗",p.id,"details")}</div>
-    <div><h2>${esc(p.name)}</h2><p>${esc(p.description||p.address||cats[p.category])}</p>
-    <p class="hint">${p.km} км${p.address?" · "+esc(p.address):""}${p.price===null?"":p.price?" · "+p.price+" ₽":" · Бесплатно"}</p>${credit(p)}</div></article>
-    <div class="controls">${btn("skip",group?"× Пропустить":"× Неинтересно")}${group?"":btn("visit","✓ Уже был")}
-    ${btn("like",group?"♡ Подходит":"♡ Хочу сходить","","positive")}</div>`;
+  return `<article class="card immersive-card" data-cat="${esc(p.category)}">
+    <div class="card-bg"></div>${photo(p)}
+    <header class="card-top"><span class="feed-city">Рязань</span>${btn("details","Инфо ↗",p.id,"details")}</header>
+    <div class="place-intro">
+      <p class="place-kind">${esc(p.kind||cats[p.category])} <span>· ${p.km} км</span></p>
+      <h1>${esc(p.name)}</h1>
+      <p class="place-preview">${esc(p.description)}</p>
+      ${credit(p)}
+      <div class="swipe-hints" aria-label="Действия с карточкой">
+        ${btn("skip","← Дальше")}${btn("visit","↑ Уже был")}${btn("like","Сохранить →")}
+      </div>
+    </div>
+    <span class="swipe-feedback" aria-hidden="true"></span>
+  </article>`;
 }
 function chips(selected){
   return `<div class="chips">${Object.entries(cats).map(([id,label])=>`<label class="chip"><input type="checkbox" name="category" value="${id}" ${selected.includes(id)?"checked":""}>${label}</label>`).join("")}</div>`;
@@ -43,11 +51,16 @@ function readFilters(f){
   return {radius:Number(f.get("radius")),categories:f.getAll("category"),budget:f.get("budget")===""?null:Number(f.get("budget"))};
 }
 function feed(places){
-  return intro("Рязань · Личная лента","Куда пойдём?","Найдите место для следующей прогулки, свидания или встречи.")
-    + `<div class="layout"><section>${places.length?card(places[0]):empty("Карточки закончились","Измените фильтры или отмените последний выбор.")}
-    <div class="spread key"><span class="muted">${places.length} в подборке · ← пропустить · → сохранить · ↑ уже был</span>${btn("undo","↶ Отменить выбор")}</div></section>
-    <details class="panel mobile-filters"><summary>Фильтры</summary><form class="stack" data-form="filter">${filterFields(filters)}<button class="positive">Показать места</button>
-    ${btn("geo",filters.origin?"От центра города":"От моего положения")}<p class="hint">Расстояние по прямой ${filters.origin?"от вашего положения":"от центра Рязани"}. При лимите бюджета показываем места с известной ценой.</p></form></details></div>`;
+  return `<section class="discover">
+    ${places.length?card(places[0]):empty("Подборка закончилась","Поменяйте фильтры или отмените последний свайп.")}
+    <div class="feed-tools">
+      <details class="mobile-filters"><summary>Фильтры</summary>
+        <form class="stack" data-form="filter">${filterFields(filters)}<button class="positive">Показать места</button>
+        ${btn("geo",filters.origin?"От центра города":"От моего положения")}</form>
+      </details>
+      <span>${places.length} мест</span>${btn("undo","↶ Отменить")}
+    </div>
+  </section>`;
 }
 function library(rows){
   const saved=page==="saved";
@@ -103,14 +116,19 @@ function openDialog(html){
 function details(p){
   if(!p)return;
   const query=encodeURIComponent([p.name,"Рязань",p.address].filter(Boolean).join(", "));
-  openDialog(`<section class="stack"><h2>${esc(p.name)}</h2>${photo(p)}<p>${esc(p.description)}</p><p>${esc(p.address||"Адрес не указан")}</p>
-    <p>${esc(p.hours||"Часы работы не указаны")}</p><p>${p.price===null?"Цена не указана":p.price?p.price+" ₽":"Бесплатно"}</p>
-    <a href="https://www.openstreetmap.org/directions?to=${p.lat},${p.lon}" target="_blank" rel="noopener">Построить маршрут ↗</a>
-    <div class="spread"><a href="https://yandex.ru/maps/?text=${query}" target="_blank" rel="noopener">Найти в Яндекс Картах ↗</a>
-    <a href="https://2gis.ru/ryazan/search/${query}" target="_blank" rel="noopener">Найти в 2ГИС ↗</a></div>
-    <a href="${link(p.source)}" target="_blank" rel="noopener">Источник сведений ↗</a>
-    ${p.external?`<a href="${link(p.external)}" target="_blank" rel="noopener">Источник координат ↗</a>`:""}
-    ${p.license?`<a href="${link(p.license)}" target="_blank" rel="noopener">© участники OpenStreetMap · ODbL</a>`:""}${credit(p)}</section>`);
+  const facts=[["Адрес",p.address],["Часы работы",p.hours],["Стоимость",p.price==null?null:p.price?`${p.price} ₽`:"Бесплатно"]];
+  openDialog(`<article class="place-sheet">
+    <div class="sheet-hero">${photo(p)}<div><span>${esc(p.kind||cats[p.category])}</span><h2>${esc(p.name)}</h2></div></div>
+    <div class="sheet-content">
+      <p class="sheet-description">${esc(p.description)}</p>
+      <dl>${facts.filter(([,value])=>value).map(([label,value])=>`<div><dt>${label}</dt><dd>${esc(value)}</dd></div>`).join("")}</dl>
+      <a class="route-link" href="https://www.openstreetmap.org/directions?to=${p.lat},${p.lon}" target="_blank" rel="noopener">Построить маршрут <span>↗</span></a>
+      <div class="sheet-links"><a href="https://yandex.ru/maps/?text=${query}" target="_blank" rel="noopener">Яндекс Карты</a>
+      <a href="https://2gis.ru/ryazan/search/${query}" target="_blank" rel="noopener">2ГИС</a>
+      <a href="${link(p.source)}" target="_blank" rel="noopener">Источник сведений</a></div>
+      <div class="sheet-credit">${credit(p)}</div>
+    </div>
+  </article>`);
 }
 function review(r){
   openDialog(`<form class="stack" data-form="review" data-id="${esc(r.placeData.id)}"><h2>${esc(r.placeData.name)}</h2>
@@ -128,14 +146,19 @@ function paint(html){
     start=[e.clientX,e.clientY]; element.setPointerCapture(e.pointerId);
   };
   element.onpointermove=e=>{
-    if(start)element.style.transform=`translateX(${(e.clientX-start[0])*.2}px)`;
+    if(!start)return;
+    const dx=e.clientX-start[0],dy=e.clientY-start[1];
+    const direction=Math.abs(dx)>Math.abs(dy)?(dx>0?"like":"skip"):(dy<0?"visit":"");
+    element.dataset.gesture=Math.hypot(dx,dy)>24?direction:"";
+    element.style.setProperty("--drag",`${Math.max(-22,Math.min(22,dx*.14))}px`);
   };
-  element.onpointercancel=()=>{start=null;element.style.transform="";};
+  element.onpointercancel=()=>{start=null;element.style.removeProperty("--drag");delete element.dataset.gesture;};
   element.onpointerup=e=>{
-    element.style.transform="";
+    element.style.removeProperty("--drag");delete element.dataset.gesture;
     if(!start)return;
     const dx=e.clientX-start[0],dy=e.clientY-start[1];start=null;
-    if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy))action(dx>0?"like":"skip");
+    if(Math.abs(dx)>52&&Math.abs(dx)>Math.abs(dy))action(dx>0?"like":"skip");
+    else if(dy < -58 && Math.abs(dy)>Math.abs(dx))action("visit");
   };
 }
 async function render(){
@@ -144,6 +167,7 @@ async function render(){
   clearTimeout(poll);current=null;state=null;
   [page,room]=(location.hash.slice(1)||"feed").split("/");
   if(!["map","feed","saved","visits"].includes(page))page="feed";
+  document.body.classList.toggle("feed-page",page==="feed");
   for(const tab of document.querySelectorAll("[data-tab]")){
     if(tab.dataset.tab===(page==="room"?"group":page))tab.setAttribute("aria-current","page");
     else tab.removeAttribute("aria-current");
