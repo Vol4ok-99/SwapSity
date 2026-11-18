@@ -72,6 +72,11 @@ async function openPlace(id){
   for(const url of new Set([place.source,place.coordinate_source,place.website,...value.facts.map(f=>f.source)])){
     link(node("p","",sources),url);
   }
+  const maps=node("p","",record);
+  const query=encodeURIComponent(["Рязань",place.name,place.address].filter(Boolean).join(" "));
+  node("a","Сверить в Яндекс Картах",maps,{href:`https://yandex.ru/maps/?text=${query}`,target:"_blank",rel:"noopener"});
+  maps.append(" · ");
+  node("a","Сверить в 2ГИС",maps,{href:`https://2gis.ru/ryazan/search/${query}`,target:"_blank",rel:"noopener"});
   const diff=node("details","",record);
   node("summary","Сравнить исходные, опубликованные и новые сведения",diff);
   node("pre",JSON.stringify({published:value.initial,raw:value.raw,processed:place,evidence:value.facts},null,2),diff);
