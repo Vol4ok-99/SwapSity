@@ -117,18 +117,55 @@ function details(p){
   if(!p)return;
   const query=encodeURIComponent([p.name,"Рязань",p.address].filter(Boolean).join(", "));
   const facts=[["Адрес",p.address],["Часы работы",p.hours],["Стоимость",p.price==null?null:p.price?`${p.price} ₽`:"Бесплатно"]];
+  const photos=p.gallery?.length?p.gallery:p.photo?[p.photo]:[];
   openDialog(`<article class="place-sheet">
-    <div class="sheet-hero">${photo(p)}<div><span>${esc(p.kind||cats[p.category])}</span><h2>${esc(p.name)}</h2></div></div>
+    <section class="photo-gallery" aria-label="Фото места">
+      ${photos.length?`<div class="photo-track" tabindex="0">${photos.map((image,index)=>`<figure>
+        <img src="${link(image.url)}" alt="${esc(image.caption||p.name)}" loading="${index?"lazy":"eager"}" referrerpolicy="no-referrer">
+        <figcaption>${credit({photo:image})}</figcaption></figure>`).join("")}</div>`:
+      `<div class="gallery-empty">Фотографий пока нет</div>`}
+      ${photos.length>1?`<div class="gallery-controls"><button type="button" data-photo-step="-1" aria-label="Предыдущее фото">‹</button>
+        <span class="photo-count" aria-live="polite">1 / ${photos.length}</span>
+        <button type="button" data-photo-step="1" aria-label="Следующее фото">›</button></div>`:""}
+    </section>
     <div class="sheet-content">
+      <div class="sheet-title"><span>${esc(p.kind||cats[p.category])}</span><h2>${esc(p.name)}</h2></div>
       <p class="sheet-description">${esc(p.description)}</p>
-      <dl>${facts.filter(([,value])=>value).map(([label,value])=>`<div><dt>${label}</dt><dd>${esc(value)}</dd></div>`).join("")}</dl>
-      <a class="route-link" href="https://www.openstreetmap.org/directions?to=${p.lat},${p.lon}" target="_blank" rel="noopener">Построить маршрут <span>↗</span></a>
-      <div class="sheet-links"><a href="https://yandex.ru/maps/?text=${query}" target="_blank" rel="noopener">Яндекс Карты</a>
-      <a href="https://2gis.ru/ryazan/search/${query}" target="_blank" rel="noopener">2ГИС</a>
-      <a href="${link(p.source)}" target="_blank" rel="noopener">Источник сведений</a></div>
-      <div class="sheet-credit">${credit(p)}</div>
+      ${p.verified?"":'<p class="hint">Адрес этой сохранённой карточки пока не перепроверен.</p>'}
+      <details class="place-more"><summary>Подробнее</summary>
+        <dl>${facts.filter(([,value])=>value).map(([label,value])=>`<div><dt>${label}</dt><dd>${esc(value)}</dd></div>`).join("")}</dl>
+        <a class="route-link" href="https://www.openstreetmap.org/directions?to=${p.lat},${p.lon}" target="_blank" rel="noopener">Построить маршрут <span>↗</span></a>
+        <div class="sheet-links"><a href="https://yandex.ru/maps/?text=${query}" target="_blank" rel="noopener">Яндекс Карты</a>
+        <a href="https://2gis.ru/ryazan/search/${query}" target="_blank" rel="noopener">2ГИС</a>
+        <a href="${link(p.source)}" target="_blank" rel="noopener">Источник сведений</a></div>
+      </details>
     </div>
   </article>`);
+  if(photos.length<2)return;
+  const track=dialog.querySelector(".photo-track");
+  const counter=dialog.querySelector(".photo-count");
+  const previous=dialog.querySelector('[data-photo-step="-1"]');
+  const next=dialog.querySelector('[data-photo-step="1"]');
+  const index=()=>Math.round(track.scrollLeft/track.clientWidth)||0;
+  const move=step=>{
+    const target=Math.max(0,Math.min(photos.length-1,index()+step));
+    track.scrollTo({left:target*track.clientWidth,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
+  };
+  const update=()=>{
+    const current=index();
+    counter.textContent=`${current+1} / ${photos.length}`;
+    previous.disabled=current<=0;
+    next.disabled=current>=photos.length-1;
+  };
+  previous.onclick=()=>move(-1);
+  next.onclick=()=>move(1);
+  track.addEventListener("scroll",update,{passive:true});
+  track.addEventListener("keydown",event=>{
+    if(!["ArrowLeft","ArrowRight"].includes(event.key))return;
+    event.preventDefault();
+    move(event.key==="ArrowRight"?1:-1);
+  });
+  update();
 }
 function review(r){
   openDialog(`<form class="stack" data-form="review" data-id="${esc(r.placeData.id)}"><h2>${esc(r.placeData.name)}</h2>
@@ -159,6 +196,7 @@ function paint(html){
     const dx=e.clientX-start[0],dy=e.clientY-start[1];start=null;
     if(Math.abs(dx)>52&&Math.abs(dx)>Math.abs(dy))action(dx>0?"like":"skip");
     else if(dy < -58 && Math.abs(dy)>Math.abs(dx))action("visit");
+    else if(Math.hypot(dx,dy)<8)details(current);
   };
 }
 async function render(){

@@ -6,17 +6,46 @@
     "lat": 54.636079,
     "lon": 39.749744,
     "address": "Кремль, 15",
-    "description": "Исторический ансамбль над Трубежом и Лыбедью. В его зданиях размещаются музейные экспозиции.",
+    "description": "Исторический ансамбль над Трубежом и Лыбедью. Здесь можно осмотреть соборы и посетить музейные экспозиции.",
     "source": "https://ryazankreml.ru/visitors/",
     "price": null,
     "photo": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/c/ce/Ryazan_Kremlin..jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Ryazan_Kremlin..jpg/960px-Ryazan_Kremlin..jpg",
       "author": "Максим Шанин",
       "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Kremlin..jpg",
-      "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "attribution": ""
     },
     "external": "https://www.wikidata.org/wiki/Q4402653",
-    "wikidata": "Q4402653"
+    "wikidata": "Q4402653",
+    "verified": true,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Ryazan_Kremlin..jpg/960px-Ryazan_Kremlin..jpg",
+        "author": "Максим Шанин",
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Kremlin..jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Kremlin_of_Ryazan.Spring.jpg/960px-Kremlin_of_Ryazan.Spring.jpg",
+        "author": "Максим Шанин",
+        "source": "https://commons.wikimedia.org/wiki/File:Kremlin_of_Ryazan.Spring.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Autumn.The_Ryazan_Kremlin.jpg/960px-Autumn.The_Ryazan_Kremlin.jpg",
+        "author": "Максим Шанин",
+        "source": "https://commons.wikimedia.org/wiki/File:Autumn.The_Ryazan_Kremlin.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "lybed",
@@ -25,9 +54,44 @@
     "lat": 54.627017,
     "lon": 39.741631,
     "address": "Лыбедский бульвар",
-    "description": "Пешеходный бульвар проходит по долине Лыбеди и связывает несколько участков центра Рязани.",
-    "source": "https://archi.ru/projects/russia/19722/blagoustroistvo-lybedskogo-bulvara",
-    "price": 0
+    "description": "Пешеходный бульвар в долине Лыбеди. По нему можно прогуляться от цирка в сторону кремля.",
+    "source": "https://ryazantourism.ru/ty-s-mestnym/otvety-na-voprosy",
+    "price": 0,
+    "verified": true,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/%D0%9B%D1%8B%D0%B1%D0%B5%D0%B4%D1%81%D0%BA%D0%B8%D0%B9_%D0%B1%D1%83%D0%BB%D1%8C%D0%B2%D0%B0%D1%80._%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg/960px-%D0%9B%D1%8B%D0%B1%D0%B5%D0%B4%D1%81%D0%BA%D0%B8%D0%B9_%D0%B1%D1%83%D0%BB%D1%8C%D0%B2%D0%B0%D1%80._%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg",
+        "author": "Andrey Mironov",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%9B%D1%8B%D0%B1%D0%B5%D0%B4%D1%81%D0%BA%D0%B8%D0%B9_%D0%B1%D1%83%D0%BB%D1%8C%D0%B2%D0%B0%D1%80._%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/Lybidska_Boulevard_in_Ryazan._Circus.jpg/960px-Lybidska_Boulevard_in_Ryazan._Circus.jpg",
+        "author": "Andrey Mironov",
+        "source": "https://commons.wikimedia.org/wiki/File:Lybidska_Boulevard_in_Ryazan._Circus.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Ryazan_Lybidska_Boulevard_2025-01_1736099295.webp/960px-Ryazan_Lybidska_Boulevard_2025-01_1736099295.webp",
+        "author": "Artyom Svetlov",
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Lybidska_Boulevard_2025-01_1736099295.webp",
+        "license": "https://creativecommons.org/licenses/by/4.0",
+        "license_label": "CC BY 4.0",
+        "attribution": "Artem Svetlov"
+      }
+    ],
+    "photo": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/%D0%9B%D1%8B%D0%B1%D0%B5%D0%B4%D1%81%D0%BA%D0%B8%D0%B9_%D0%B1%D1%83%D0%BB%D1%8C%D0%B2%D0%B0%D1%80._%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg/960px-%D0%9B%D1%8B%D0%B1%D0%B5%D0%B4%D1%81%D0%BA%D0%B8%D0%B9_%D0%B1%D1%83%D0%BB%D1%8C%D0%B2%D0%B0%D1%80._%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg",
+      "author": "Andrey Mironov",
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%9B%D1%8B%D0%B1%D0%B5%D0%B4%D1%81%D0%BA%D0%B8%D0%B9_%D0%B1%D1%83%D0%BB%D1%8C%D0%B2%D0%B0%D1%80._%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "attribution": ""
+    }
   },
   {
     "id": "pavlov",
@@ -36,11 +100,46 @@
     "lat": 54.631812,
     "lon": 39.727759,
     "address": "ул. Павлова, 25",
-    "description": "Мемориальная усадьба на улице Павлова. Экспозиции посвящены семье и научной работе Ивана Павлова.",
+    "description": "Мемориальная усадьба Ивана Павлова. В музее рассказывают о жизни семьи и научных открытиях физиолога.",
     "source": "https://pavlovmuseum.ru/museum/contacts",
     "price": null,
     "external": "https://www.runcity.org/ru/events/ryazan2017/routes/history/",
-    "hours": "10:00–17:30, дни работы уточняйте на сайте музея"
+    "hours": "10:00–17:30, дни работы уточняйте на сайте музея",
+    "verified": true,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Pavlov_Museum_Ryazan.jpg/960px-Pavlov_Museum_Ryazan.jpg",
+        "author": "Ymblanter",
+        "source": "https://commons.wikimedia.org/wiki/File:Pavlov_Museum_Ryazan.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/I.P._Pavlov_House_Ryazan.JPG/960px-I.P._Pavlov_House_Ryazan.JPG",
+        "author": "Ceroi",
+        "source": "https://commons.wikimedia.org/wiki/File:I.P._Pavlov_House_Ryazan.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/%D0%94%D0%BE%D0%BC%2C_%D0%B2_%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D0%BE%D0%BC_%D0%B6%D0%B8%D0%BB_%D1%84%D0%B8%D0%B7%D0%B8%D0%BE%D0%BB%D0%BE%D0%B3_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2_%D0%98.%D0%9F._-_1.jpg/960px-%D0%94%D0%BE%D0%BC%2C_%D0%B2_%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D0%BE%D0%BC_%D0%B6%D0%B8%D0%BB_%D1%84%D0%B8%D0%B7%D0%B8%D0%BE%D0%BB%D0%BE%D0%B3_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2_%D0%98.%D0%9F._-_1.jpg",
+        "author": "Nikamart",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%94%D0%BE%D0%BC,_%D0%B2_%D0%BA%D0%BE%D1%82%D0%BE%D1%80%D0%BE%D0%BC_%D0%B6%D0%B8%D0%BB_%D1%84%D0%B8%D0%B7%D0%B8%D0%BE%D0%BB%D0%BE%D0%B3_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2_%D0%98.%D0%9F._-_1.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      }
+    ],
+    "photo": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Pavlov_Museum_Ryazan.jpg/960px-Pavlov_Museum_Ryazan.jpg",
+      "author": "Ymblanter",
+      "source": "https://commons.wikimedia.org/wiki/File:Pavlov_Museum_Ryazan.jpg",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "attribution": ""
+    }
   },
   {
     "id": "pavlov-monument",
@@ -5364,23 +5463,50 @@
     "category": "culture",
     "lat": 54.627148,
     "lon": 39.7516077,
-    "address": "",
-    "description": "Музей. 650 м от центра Рязани.",
+    "address": "ул. Свободы, 57",
+    "description": "Художественный музей имени И. П. Пожалостина. Собрание включает живопись, графику и скульптуру.",
     "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/relation/1608340",
+    "source": "https://www.ukrzn.ru/?id=11&institution=35&mod=institutions",
     "license": "https://www.openstreetmap.org/copyright",
     "photo": {
-      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%B3%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%BD%D0%BE%D0%B9_%D1%85%D1%83%D0%B4%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%B8%D0%BC._%D0%98._%D0%9F._%D0%9F%D0%BE%D0%B6%D0%B0%D0%BB%D0%BE%D1%81%D1%82%D0%B8%D0%BD%D0%B0.JPG/960px-%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%B3%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%BD%D0%BE%D0%B9_%D1%85%D1%83%D0%B4%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%B8%D0%BC._%D0%98._%D0%9F._%D0%9F%D0%BE%D0%B6%D0%B0%D0%BB%D0%BE%D1%81%D1%82%D0%B8%D0%BD%D0%B0.JPG",
-      "author": "Defekot",
-      "source": "https://commons.wikimedia.org/wiki/File:%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%B3%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%BD%D0%BE%D0%B9_%D1%85%D1%83%D0%B4%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%B8%D0%BC._%D0%98._%D0%9F._%D0%9F%D0%BE%D0%B6%D0%B0%D0%BB%D0%BE%D1%81%D1%82%D0%B8%D0%BD%D0%B0.JPG",
-      "license": "https://creativecommons.org/licenses/by-sa/3.0",
-      "license_label": "CC BY-SA 3.0",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Ryazan_Art_Museum.jpg/960px-Ryazan_Art_Museum.jpg",
+      "author": "Максим Шанин",
+      "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Art_Museum.jpg",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
       "attribution": ""
     },
     "wikidata": "Q16693441",
     "commons_file": null,
-    "kind": "Музей"
+    "kind": "Музей",
+    "verified": true,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Ryazan_Art_Museum.jpg/960px-Ryazan_Art_Museum.jpg",
+        "author": "Максим Шанин",
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Art_Museum.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/%D0%A5%D1%83%D0%B4%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9%2C_%D0%B2%D1%85%D0%BE%D0%B4_%D1%81_%D1%83%D0%BB%D0%B8%D1%86%D1%8B_%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B.JPG/960px-%D0%A5%D1%83%D0%B4%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9%2C_%D0%B2%D1%85%D0%BE%D0%B4_%D1%81_%D1%83%D0%BB%D0%B8%D1%86%D1%8B_%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B.JPG",
+        "author": "KirillKoriakin",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A5%D1%83%D0%B4%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D1%8B%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9,_%D0%B2%D1%85%D0%BE%D0%B4_%D1%81_%D1%83%D0%BB%D0%B8%D1%86%D1%8B_%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Ruminhouse.jpg/960px-Ruminhouse.jpg",
+        "author": "VadimK55555",
+        "source": "https://commons.wikimedia.org/wiki/File:Ruminhouse.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:relation:1608348",
@@ -7464,16 +7590,42 @@
     "category": "culture",
     "lat": 54.6210686,
     "lon": 39.7576647,
-    "address": "Театральная площадь, 7",
-    "description": "Театр. Театральная площадь, 7.",
-    "hours": "Mo-Fr 10:00-19:00; Sa-Su 10:00-18:00",
+    "address": "Театральная площадь, 7А",
+    "description": "Областной театр драмы на Театральной площади. Афиша и билеты доступны на сайте театра.",
+    "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/96881608",
+    "source": "https://rzndrama.ru/",
     "license": "https://www.openstreetmap.org/copyright",
-    "photo": null,
+    "photo": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Ryazan_drama_theater.jpg/960px-Ryazan_drama_theater.jpg",
+      "author": "Максим Шанин",
+      "source": "https://commons.wikimedia.org/wiki/File:Ryazan_drama_theater.jpg",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0",
+      "license_label": "CC BY-SA 3.0",
+      "attribution": ""
+    },
     "wikidata": null,
     "commons_file": null,
-    "kind": "Театр"
+    "kind": "Театр",
+    "verified": true,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Ryazan_drama_theater.jpg/960px-Ryazan_drama_theater.jpg",
+        "author": "Максим Шанин",
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_drama_theater.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/%D0%93._%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%2C_%D0%A2%D0%B5%D0%B0%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C%2C_7%2C_%D0%94%D1%80%D0%B0%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D1%82%D0%B5%D0%B0%D1%82%D1%80.jpg/960px-%D0%93._%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%2C_%D0%A2%D0%B5%D0%B0%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C%2C_7%2C_%D0%94%D1%80%D0%B0%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D1%82%D0%B5%D0%B0%D1%82%D1%80.jpg",
+        "author": "Коварж О.В.",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%93._%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C,_%D0%A2%D0%B5%D0%B0%D1%82%D1%80%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C,_7,_%D0%94%D1%80%D0%B0%D0%BC%D0%B0%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D1%82%D0%B5%D0%B0%D1%82%D1%80.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:way:969579428",

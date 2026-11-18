@@ -6,7 +6,7 @@ catch { localHistory = {}; }
 let catalogRequest;
 
 function getCatalog(){
-  if(!catalogRequest) catalogRequest=fetch("./catalog.json?v=2").then(response=>{
+  if(!catalogRequest) catalogRequest=fetch("./catalog.json?v=3").then(response=>{
     if(!response.ok) throw Error("Каталог временно недоступен");
     return response.json();
   }).catch(error=>{catalogRequest=null;throw error;});
@@ -25,10 +25,10 @@ function kmAway(origin,place){
 async function api(path,data={},method="GET"){
   if(path==="profile") return {name:"Гость",nickname:null,interests:[]};
   const places=await getCatalog();
-  if(path==="map")return places;
+  if(path==="map")return places.filter(p=>p.verified);
   if(path==="feed"){
     const origin=data.origin||[54.632,39.746];
-    return places.filter(p=>!Object.hasOwn(localHistory,p.id)&&
+    return places.filter(p=>p.verified&&!Object.hasOwn(localHistory,p.id)&&
       (!data.categories?.length||data.categories.includes(p.category))&&
       (data.budget==null||p.price!=null&&p.price<=data.budget))
       .map(p=>({...p,km:Math.round(kmAway(origin,p)*100)/100}))
