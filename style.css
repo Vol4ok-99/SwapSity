@@ -153,3 +153,34 @@ dialog:has(.place-sheet) .close{position:sticky;top:10px;z-index:2;margin:10px 9
 .place-more{border-top:1px solid var(--line);padding-top:10px}
 .place-more summary{font-weight:700;cursor:pointer;padding:7px 0}
 .place-more .route-link{margin:8px 0 12px}
+/* Map viewport. Only the map surface receives pan and pinch gestures. */
+.map-page{overflow:hidden;padding:0}
+.map-page .bar{position:fixed;top:0;left:0;right:0;z-index:800;background:transparent;border:0;pointer-events:none}
+.map-page .bar-inner{pointer-events:auto;background:var(--surface);border:1px solid var(--line);border-radius:18px;margin:10px auto;width:min(700px,calc(100% - 20px));min-height:54px;padding:5px 11px}
+.map-page main,.map-page main:has(.city-board){position:fixed;inset:0;max-width:none;margin:0;padding:0}
+.map-page .data-credit{display:none}
+.map-page .city-board,.map-page .city-grid,.map-page .city-viewport,.map-page .city-map{position:absolute;inset:0;height:auto;width:auto;margin:0;border:0;border-radius:0}
+.map-page .city-heading{position:absolute;top:80px;left:16px;right:16px;z-index:510;display:flex;align-items:center;gap:10px;margin:0;pointer-events:none}
+.map-page .city-heading h1{font-size:20px;letter-spacing:-.02em;background:var(--surface);border-radius:999px;padding:8px 13px;flex:none}
+.map-page .city-filters{pointer-events:auto;padding:4px 0}
+.map-page .city-filters button{min-height:40px;box-shadow:0 2px 9px #233b2924}
+.city-tiles img{transform-origin:0 0;filter:saturate(.88) contrast(.97)}
+:root[data-theme=dark] .city-tiles img{filter:invert(.89) hue-rotate(176deg) saturate(.74) brightness(.87) contrast(1.04)}
+.map-page .city-actions,.map-page .city-zoom{position:absolute;right:13px;z-index:501;display:grid;gap:8px}
+.map-page .city-actions{bottom:126px}.map-page .city-zoom{bottom:29px}
+.map-page .city-actions button,.map-page .city-zoom button{height:44px;width:44px;padding:0;border-radius:14px;background:var(--surface);color:var(--ink);font-size:23px;box-shadow:0 3px 12px #233b292f}
+.map-page .city-status{top:136px}
+.map-page .city-attribution{color:#283730;background:#f7faf5e8}
+.map-page dialog:has(.place-sheet){position:fixed;inset:auto 0 0;margin:0 auto;max-height:84dvh;border-radius:22px 22px 0 0;transform:translateY(var(--sheet-drag,0px));overscroll-behavior:contain}
+.sheet-grip{display:flex;justify-content:center;align-items:center;height:24px;background:var(--surface);touch-action:none;cursor:grab}
+.sheet-grip span{width:38px;height:4px;border-radius:999px;background:var(--muted);opacity:.55}
+dialog:has(.place-sheet) .close{top:26px;margin-bottom:-49px}
+@media(max-width:680px){
+  .map-page .bar-inner{margin:calc(6px + env(safe-area-inset-top)) 8px 0;width:calc(100% - 16px);min-height:48px}
+  .map-page .city-heading{top:calc(63px + env(safe-area-inset-top));left:9px;right:9px}
+  .map-page .city-heading h1{font-size:16px}
+  .map-page .city-actions{bottom:calc(185px + env(safe-area-inset-bottom))}
+  .map-page .city-zoom{bottom:calc(87px + env(safe-area-inset-bottom))}
+  .map-page .city-attribution{bottom:calc(63px + env(safe-area-inset-bottom))}
+  .map-page .city-status{top:calc(113px + env(safe-area-inset-top))}
+}

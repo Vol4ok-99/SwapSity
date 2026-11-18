@@ -5,7 +5,7 @@ const pinIcons = {culture:"♪",nature:"♧",food:"☕",fun:"✦",active:"⚑",u
 const tileSize = 256;
 function cityMapView(){
   return `<section class="city-board">
-    <div class="city-heading"><h1>Рязань на карте</h1><div class="city-filters" aria-label="Категории">
+    <div class="city-heading"><h1>Рязань</h1><div class="city-filters" aria-label="Категории">
     <button type="button" data-city-filter="" aria-pressed="true">Все места</button>
     ${Object.entries(cats).map(([key,label])=>`<button type="button" data-city-filter="${key}" aria-pressed="false">${label}</button>`).join("")}
     </div></div>
@@ -16,13 +16,12 @@ function cityMapView(){
           <div id="city-pins" class="city-pins"></div>
         </div>
         <p id="city-status" class="city-status" role="status" hidden></p>
-        <button id="city-locate" class="city-locate" type="button">◎ Моё место</button>
+        <div class="city-actions"><button id="city-locate" type="button" aria-label="Моё местоположение" title="Моё местоположение">◎</button><button id="city-reset" type="button" aria-label="Вернуться в Рязань" title="Вернуться в Рязань">⌂</button></div>
         <div class="city-zoom"><button id="city-plus" aria-label="Приблизить">+</button><button id="city-minus" aria-label="Отдалить">−</button></div>
         <a class="city-attribution" href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap</a>
       </section>
 
     </div>
-    <p class="city-key"><span class="key-place"></span> Места <span class="key-self"></span> Вы</p>
   </section>`;
 }
 function project([lat,lon], zoom){
@@ -65,9 +64,10 @@ function drawCity(context){
   const [x,y]=project(context.center,zoom);
   const left=x-width/2,top=y-height/2;
   const visible=new Set();
-  for(let column=Math.floor(left/tileSize);column<=Math.floor((left+width)/tileSize);column++){
-    for(let row=Math.floor(top/tileSize);row<=Math.floor((top+height)/tileSize);row++){
-      const key=zoom+"/"+column+"/"+row;
+  const tileZoom=Math.floor(zoom), span=tileSize*2**(zoom-tileZoom);
+  for(let column=Math.floor(left/span);column<=Math.floor((left+width)/span);column++){
+    for(let row=Math.floor(top/span);row<=Math.floor((top+height)/span);row++){
+      const key=tileZoom+"/"+column+"/"+row;
       let image=context.images.get(key);
       if(!image){
         image=document.createElement("img");
@@ -87,7 +87,7 @@ function drawCity(context){
         tiles.append(image);
       }
       visible.add(key);
-      image.style.transform=`translate3d(${column*tileSize-left}px,${row*tileSize-top}px,0)`;
+      image.style.transform=`translate3d(${column*span-left}px,${row*span-top}px,0) scale(${span/tileSize})`;
     }
   }
   for(const [key,image] of context.images){
@@ -143,22 +143,33 @@ function drawCity(context){
   pins.replaceChildren(...markers);
   if(existingFocus)markers.find(marker=>marker.dataset.pin===existingFocus)?.focus({preventScroll:true});
 }
-function changeZoom(context,delta){
-  context.zoom=Math.max(11,Math.min(18,context.zoom+delta));
+function zoomAt(context, zoom, before, after=before){
+  const next=Math.max(11,Math.min(18,zoom));
+  const anchor=unproject(project(context.center,context.zoom).map((v,i)=>v+before[i]),context.zoom);
+  context.center=clampCity(unproject(project(anchor,next).map((v,i)=>v-after[i]),next));
+  context.zoom=next;
   scheduleCity(context);
+}
+function changeZoom(context,delta){
+  zoomAt(context,context.zoom+delta,[0,0]);
 }
 function bindMapGestures(context){
   const {canvas}=context;
   const pointers=new Map();
-  let pinch=0;
+  let start, lastTap, multi=false;
+  const relative=point=>{
+    const rect=canvas.getBoundingClientRect();
+    return [point[0]-rect.left-rect.width/2,point[1]-rect.top-rect.height/2];
+  };
+  const midpoint=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2];
+  const gap=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
   canvas.onpointerdown=event=>{
-    if(event.target.closest("button")||event.button!==0&&event.pointerType==="mouse")return;
-    pointers.set(event.pointerId,[event.clientX,event.clientY]);
+    if(event.target.closest("button")||event.button!==0&&event.pointerType==="mouse"||pointers.size>=2)return;
+    const point=[event.clientX,event.clientY];
+    if(!pointers.size){start=point;multi=false;}
+    pointers.set(event.pointerId,point);
+    if(pointers.size===2)multi=true;
     canvas.setPointerCapture(event.pointerId);
-    if(pointers.size===2){
-      const [a,b]=pointers.values();
-      pinch=Math.hypot(a[0]-b[0],a[1]-b[1]);
-    }
     canvas.classList.add("dragging");
   };
   canvas.onpointermove=event=>{
@@ -167,16 +178,29 @@ function bindMapGestures(context){
     const current=[event.clientX,event.clientY];
     pointers.set(event.pointerId,current);
     if(pointers.size===2){
-      const [a,b]=pointers.values();
-      const distance=Math.hypot(a[0]-b[0],a[1]-b[1]);
-      if(distance>pinch*1.40||distance<pinch*.72){
-        changeZoom(context,distance>pinch?1:-1);pinch=distance;
+      const other=[...pointers.entries()].find(([id])=>id!==event.pointerId)[1];
+      const oldDistance=gap(other,previous),newDistance=gap(other,current);
+      if(oldDistance>3&&newDistance>3){
+        zoomAt(context,context.zoom+Math.log2(newDistance/oldDistance),
+          relative(midpoint(other,previous)),relative(midpoint(other,current)));
       }
-    }else if(pointers.size===1){
+    }else{
       const [x,y]=project(context.center,context.zoom);
       context.center=clampCity(unproject([x-current[0]+previous[0],y-current[1]+previous[1]],context.zoom));
       scheduleCity(context);
     }
+  };
+  canvas.onpointerup=event=>{
+    if(!pointers.has(event.pointerId)||event.pointerType==="mouse"||multi)return;
+    const point=[event.clientX,event.clientY],time=performance.now();
+    if(gap(point,start)>12){lastTap=null;return;}
+    if(lastTap&&time-lastTap.time<330&&gap(point,lastTap.point)<25){
+      zoomAt(context,context.zoom+1,relative(point));lastTap=null;
+    }else lastTap={time,point};
+  };
+  canvas.ondblclick=event=>{
+    if(event.target.closest("button")||event.sourceCapabilities?.firesTouchEvents)return;
+    zoomAt(context,context.zoom+1,relative([event.clientX,event.clientY]));
   };
   canvas.onlostpointercapture=event=>{
     pointers.delete(event.pointerId);
@@ -279,6 +303,7 @@ function mountCityMap(token){
       await refreshCityPeople(context);
     }finally{context.share.disabled=false;}
   });
+  get("reset").onclick=()=>{context.center=cityCenter;context.zoom=13;scheduleCity(context);};
   get("plus").onclick=()=>changeZoom(context,1);
   get("minus").onclick=()=>changeZoom(context,-1);
   for(const filter of main.querySelectorAll("[data-city-filter]")){

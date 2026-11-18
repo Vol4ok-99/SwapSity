@@ -116,9 +116,10 @@ function openDialog(html){
 function details(p){
   if(!p)return;
   const query=encodeURIComponent([p.name,"Рязань",p.address].filter(Boolean).join(", "));
-  const facts=[["Адрес",p.address],["Часы работы",p.hours],["Стоимость",p.price==null?null:p.price?`${p.price} ₽`:"Бесплатно"]];
+  const facts=[["Адрес",p.address],["Часы работы",p.hours],["Стоимость",p.price==null?null:p.price?`${p.price} ₽`:"Бесплатно"],["Сверено",p.verified_on]];
   const photos=p.gallery?.length?p.gallery:p.photo?[p.photo]:[];
   openDialog(`<article class="place-sheet">
+    <div class="sheet-grip" aria-hidden="true"><span></span></div>
     <section class="photo-gallery" aria-label="Фото места">
       ${photos.length?`<div class="photo-track" tabindex="0">${photos.map((image,index)=>`<figure>
         <img src="${link(image.url)}" alt="${esc(image.caption||p.name)}" loading="${index?"lazy":"eager"}" referrerpolicy="no-referrer">
@@ -137,10 +138,21 @@ function details(p){
         <a class="route-link" href="https://www.openstreetmap.org/directions?to=${p.lat},${p.lon}" target="_blank" rel="noopener">Построить маршрут <span>↗</span></a>
         <div class="sheet-links"><a href="https://yandex.ru/maps/?text=${query}" target="_blank" rel="noopener">Яндекс Карты</a>
         <a href="https://2gis.ru/ryazan/search/${query}" target="_blank" rel="noopener">2ГИС</a>
-        <a href="${link(p.source)}" target="_blank" rel="noopener">Источник сведений</a></div>
+        <a href="${link(p.source)}" target="_blank" rel="noopener">Источник сведений</a>${p.coordinate_source?`<a href="${link(p.coordinate_source)}" target="_blank" rel="noopener">Источник координат</a>`:""}${p.website?`<a href="${link(p.website)}" target="_blank" rel="noopener">Официальный сайт</a>`:""}</div>
       </details>
     </div>
   </article>`);
+  const grip=dialog.querySelector(".sheet-grip");
+  let touchStart;
+  grip.onpointerdown=event=>{touchStart=event.clientY;grip.setPointerCapture(event.pointerId);};
+  grip.onpointermove=event=>{
+    if(touchStart!==undefined)dialog.style.setProperty("--sheet-drag",`${Math.max(0,event.clientY-touchStart)}px`);
+  };
+  grip.onpointerup=event=>{
+    if(touchStart!==undefined&&event.clientY-touchStart>55)dialog.close();
+    touchStart=undefined;dialog.style.removeProperty("--sheet-drag");
+  };
+  grip.onpointercancel=()=>{touchStart=undefined;dialog.style.removeProperty("--sheet-drag");};
   if(photos.length<2)return;
   const track=dialog.querySelector(".photo-track");
   const counter=dialog.querySelector(".photo-count");
@@ -206,6 +218,7 @@ async function render(){
   [page,room]=(location.hash.slice(1)||"feed").split("/");
   if(!["map","feed","saved","visits"].includes(page))page="feed";
   document.body.classList.toggle("feed-page",page==="feed");
+  document.body.classList.toggle("map-page",page==="map");
   for(const tab of document.querySelectorAll("[data-tab]")){
     if(tab.dataset.tab===(page==="room"?"group":page))tab.setAttribute("aria-current","page");
     else tab.removeAttribute("aria-current");

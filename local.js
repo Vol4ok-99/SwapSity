@@ -6,7 +6,7 @@ catch { localHistory = {}; }
 let catalogRequest;
 
 function getCatalog(){
-  if(!catalogRequest) catalogRequest=fetch("./catalog.json?v=3").then(response=>{
+  if(!catalogRequest) catalogRequest=fetch("./catalog.json?v=4").then(response=>{
     if(!response.ok) throw Error("Каталог временно недоступен");
     return response.json();
   }).catch(error=>{catalogRequest=null;throw error;});

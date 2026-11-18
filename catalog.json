@@ -45,7 +45,10 @@
         "license_label": "CC BY-SA 4.0",
         "attribution": ""
       }
-    ]
+    ],
+    "verified_on": "2026-11-18",
+    "coordinate_source": "https://www.wikidata.org/wiki/Q4402653",
+    "website": "https://ryazankreml.ru/"
   },
   {
     "id": "lybed",
@@ -91,7 +94,9 @@
       "license": "https://creativecommons.org/licenses/by-sa/4.0",
       "license_label": "CC BY-SA 4.0",
       "attribution": ""
-    }
+    },
+    "verified_on": "2026-11-18",
+    "coordinate_source": "https://archi.ru/projects/russia/19722/blagoustroistvo-lybedskogo-bulvara"
   },
   {
     "id": "pavlov",
@@ -139,7 +144,10 @@
       "license": "https://creativecommons.org/licenses/by-sa/4.0",
       "license_label": "CC BY-SA 4.0",
       "attribution": ""
-    }
+    },
+    "verified_on": "2026-11-18",
+    "coordinate_source": "https://www.runcity.org/ru/events/ryazan2017/routes/history/",
+    "website": "https://pavlovmuseum.ru/"
   },
   {
     "id": "pavlov-monument",
@@ -5506,7 +5514,9 @@
         "license_label": "CC BY-SA 3.0",
         "attribution": ""
       }
-    ]
+    ],
+    "verified_on": "2026-11-18",
+    "coordinate_source": "https://www.openstreetmap.org/relation/1608340"
   },
   {
     "id": "osm:relation:1608348",
@@ -7625,7 +7635,10 @@
         "license_label": "CC BY-SA 4.0",
         "attribution": ""
       }
-    ]
+    ],
+    "verified_on": "2026-11-18",
+    "coordinate_source": "https://www.openstreetmap.org/way/96881608",
+    "website": "https://rzndrama.ru/"
   },
   {
     "id": "osm:way:969579428",
