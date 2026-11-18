@@ -2,7 +2,8 @@
 const main = document.querySelector("main"), dialog = document.querySelector("dialog");
 const cats = {culture:"Культура",nature:"Прогулки",food:"Еда и напитки",fun:"Развлечения",active:"Активный отдых",unusual:"Необычные места"};
 let page, room, state, current, me, busy, version=0, poll, timer;
-let filters={radius:5,categories:[],budget:null};
+let filters={radius:5,categories:[],budget:null,includeUnknown:false};
+let categoryCounts={};
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const link=s=>typeof s==="string"&&s.startsWith("https://")?esc(s):"#";
 const intro=(label,title,description)=>`<section class="intro"><p class="kicker">${label}</p><h1>${title}</h1><p>${description}</p></section>`;
@@ -19,6 +20,7 @@ function photo(p){
   return p.photo?`<img src="${href}" alt="${esc(p.name)}" referrerpolicy="no-referrer" draggable="false">`:"";
 }
 function credit(p){
+  if(p.photo?.license==="permission")return `<span class="photo-credit">${esc(p.photo.attribution||p.photo.author)} · <a href="${link(p.photo.permission_url)}" target="_blank" rel="noopener">Разрешение правообладателя</a></span>`;
   if(p.photo?.local)return `<span class="photo-credit">Фото: ${esc(p.photo.author)}</span>`;
   return p.photo?`<span class="photo-credit"><a href="${link(p.photo.source)}" target="_blank" rel="noopener">${esc(p.photo.attribution||p.photo.author)}</a> · <a href="${link(p.photo.license)}" target="_blank" rel="noopener">${esc(p.photo.license_label||"CC BY-SA 4.0")}</a></span>`:`<span class="no-photo">Фотографии пока нет</span>`;
 }
@@ -30,7 +32,7 @@ function card(p){
     <div class="place-intro">
       <p class="place-kind">${esc(p.kind||cats[p.category])} <span>· ${p.km} км</span></p>
       <h1>${esc(p.name)}</h1>
-      <p class="place-preview">${esc(p.description)}</p>
+      <p class="place-preview">${esc(p.description||p.kind||cats[p.category])}</p>
       ${credit(p)}
       <div class="swipe-hints" aria-label="Действия с карточкой">
         ${btn("skip","← Дальше")}${btn("visit","↑ Уже был")}${btn("like","Сохранить →")}
@@ -40,19 +42,20 @@ function card(p){
   </article>`;
 }
 function chips(selected){
-  return `<div class="chips">${Object.entries(cats).map(([id,label])=>`<label class="chip"><input type="checkbox" name="category" value="${id}" ${selected.includes(id)?"checked":""}>${label}</label>`).join("")}</div>`;
+  return `<div class="chips">${Object.entries(cats).map(([id,label])=>`<label class="chip"><input type="checkbox" name="category" value="${id}" ${selected.includes(id)?"checked":""}>${label}${categoryCounts[id]!=null?` (${categoryCounts[id]})`:" (0)"}</label>`).join("")}</div>`;
 }
 function filterFields(f){
   return `<label>Радиус<select name="radius">${[1,3,5,10,25,50].map(n=>`<option value="${n}" ${f.radius===n?"selected":""}>${n} км</option>`).join("")}</select></label>
     <fieldset><legend>Категории</legend>${chips(f.categories)}</fieldset>
-    <label>Бюджет до, ₽<input name="budget" type="number" min="0" max="100000" placeholder="Любой" value="${f.budget??""}"></label>`;
+    <label>Бюджет до, ₽<input name="budget" type="number" min="0" max="100000" placeholder="Любой" value="${f.budget??""}"></label>
+    <label><span><input type="checkbox" name="includeUnknown" ${f.includeUnknown?"checked":""}> Показывать места без указанной цены</span></label>`;
 }
 function readFilters(f){
-  return {radius:Number(f.get("radius")),categories:f.getAll("category"),budget:f.get("budget")===""?null:Number(f.get("budget"))};
+  return {radius:Number(f.get("radius")),categories:f.getAll("category"),budget:f.get("budget")===""?null:Number(f.get("budget")),includeUnknown:f.has("includeUnknown")};
 }
 function feed(places){
   return `<section class="discover">
-    ${places.length?card(places[0]):empty("Подборка закончилась","Поменяйте фильтры или отмените последний свайп.")}
+    ${places.length?card(places[0]):empty("Подходящих мест нет",(filters.categories.length||filters.budget!=null||filters.origin||filters.radius!==5)?"Попробуйте сбросить фильтры. Возможно, для части мест цена неизвестна.":"Вы уже просмотрели доступные места рядом. Можно отменить последний свайп.")+`<div class="controls">${btn("reset-filters","Сбросить фильтры")}</div>`}
     <div class="feed-tools">
       <details class="mobile-filters"><summary>Фильтры</summary>
         <form class="stack" data-form="filter">${filterFields(filters)}<button class="positive">Показать места</button>
@@ -135,7 +138,7 @@ function details(p){
     </section>
     <div class="sheet-content">
       <div class="sheet-title"><span>${esc(p.kind||cats[p.category])}</span><h2>${esc(p.name)}</h2></div>
-      <p class="sheet-description">${esc(p.description)}</p>
+      <p class="sheet-description">${esc(p.description||p.kind||cats[p.category])}</p>
       ${p.verified?"":'<p class="hint">Адрес этой сохранённой карточки пока не перепроверен.</p>'}
       ${p.verified?`<div class="place-route">
         <a class="route-link" href="${esc(yandexRoute(p))}" target="_blank" rel="noopener">Проложить маршрут <span>↗</span></a>
@@ -232,7 +235,7 @@ async function render(){
   try{
     me ||= await api("profile");
     let data;
-    if(page==="feed")data=await api("feed",filters);
+    if(page==="feed")[data,categoryCounts]=await Promise.all([api("feed",filters),api("counts",filters)]);
     if(page==="saved"||page==="visits")data=await api("library");
     if(page==="room")data=await api("rooms/"+encodeURIComponent(room||""));
     if(token!==version)return;
@@ -297,6 +300,7 @@ function action(name,id,button){
     }
     if(name==="logout"){await api("logout",{});me=null;}
     if(name==="undo")await api("undo",{});
+    if(name==="reset-filters")filters={radius:5,categories:[],budget:null,includeUnknown:false};
     if(name==="unsave")await api("saved",{place:id});
     if(["like","skip","visit"].includes(name)){
       if(!p)return;

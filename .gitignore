@@ -1,0 +1,8 @@
+__pycache__/
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+candidates.json
+catalog.staging.json
+catalog.previous.json
+catalog.report.json

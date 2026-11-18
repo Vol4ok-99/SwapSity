@@ -319,7 +319,16 @@ function mountCityMap(token){
   work(async()=>{
     const places=await api("map");
     if(cityMap!==context||token!==version)return;
-    context.places=places;scheduleCity(context);
+    context.places=places;
+    const counts=places.reduce((totals,place)=>{
+      totals[place.category]=(totals[place.category]||0)+1;
+      return totals;
+    },{});
+    for(const button of main.querySelectorAll("[data-city-filter]")){
+      const key=button.dataset.cityFilter;
+      button.textContent=key?`${cats[key]} (${counts[key]||0})`:`Все места (${places.length})`;
+    }
+    scheduleCity(context);
   });
 }
 document.addEventListener("click",event=>{

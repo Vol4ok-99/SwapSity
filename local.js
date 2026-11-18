@@ -6,7 +6,7 @@ catch { localHistory = {}; }
 let catalogRequest;
 
 function getCatalog(){
-  if(!catalogRequest) catalogRequest=fetch("./catalog.json?v=6").then(response=>{
+  if(!catalogRequest) catalogRequest=fetch("./catalog.json?v=7").then(response=>{
     if(!response.ok) throw Error("Каталог временно недоступен");
     return response.json();
   }).catch(error=>{catalogRequest=null;throw error;});
@@ -26,13 +26,17 @@ async function api(path,data={},method="GET"){
   if(path==="profile") return {name:"Гость",nickname:null,interests:[]};
   const places=await getCatalog();
   if(path==="map")return places.filter(p=>p.verified);
-  if(path==="feed"){
+  if(path==="feed"||path==="counts"){
     const origin=data.origin||[54.632,39.746];
-    return places.filter(p=>p.verified&&!Object.hasOwn(localHistory,p.id)&&
-      (!data.categories?.length||data.categories.includes(p.category))&&
-      (data.budget==null||p.price!=null&&p.price<=data.budget))
+    const available=places.filter(p=>p.verified&&!Object.hasOwn(localHistory,p.id)&&
+      (data.budget==null||(p.price==null?data.includeUnknown:p.price<=data.budget)))
       .map(p=>({...p,km:Math.round(kmAway(origin,p)*100)/100}))
-      .filter(p=>p.km<=(data.radius||5))
+      .filter(p=>p.km<=(data.radius||5));
+    if(path==="counts")return available.reduce((counts,p)=>{
+      counts[p.category]=(counts[p.category]||0)+1;
+      return counts;
+    },{});
+    return available.filter(p=>!data.categories?.length||data.categories.includes(p.category))
       .sort((a,b)=>Number(Boolean(b.photo))-Number(Boolean(a.photo))||a.km-b.km||a.id.localeCompare(b.id));
   }
   if(path==="library")return places.filter(p=>Object.hasOwn(localHistory,p.id)&&localHistory[p.id].action!=="skip")

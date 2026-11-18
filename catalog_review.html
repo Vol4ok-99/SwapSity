@@ -1,0 +1,112 @@
+
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Проверка мест · SwipeCity</title>
+<style>
+body{margin:0;background:#f4f6f3;color:#202c25;font:16px system-ui}main{max-width:1120px;margin:auto;padding:22px}
+header{display:flex;gap:12px;align-items:center;flex-wrap:wrap}h1,h2{margin:6px 0}
+.layout{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,2.4fr);gap:15px;margin-top:18px}
+aside,section{background:white;border:1px solid #d9e2da;padding:16px;border-radius:14px}
+aside{max-height:74vh;overflow:auto}aside button{width:100%;text-align:left;margin:3px 0}
+button,input,textarea{font:inherit;padding:7px;border:1px solid #b9c9bc;border-radius:7px;background:#fff}
+textarea{width:100%;min-height:210px;box-sizing:border-box}p{overflow-wrap:anywhere}
+label{display:block;margin:8px 0}img{width:150px;max-width:100%;height:96px;object-fit:cover;border-radius:7px}
+pre{white-space:pre-wrap;overflow-wrap:anywhere}.tools{display:flex;flex-wrap:wrap;gap:6px}
+a{color:#165649}.diff{display:grid;grid-template-columns:1fr 1fr;gap:8px}small{color:#496256}
+@media(max-width:650px){.layout,.diff{grid-template-columns:1fr}aside{max-height:30vh}}
+</style>
+<main><header><h1>Проверка мест</h1><span id="count"></span></header>
+<p>Сверьте источники и зафиксируйте причину решения. Подтверждение отправляет запись в предварительный каталог.</p>
+<div class="layout"><aside><input id="search" aria-label="Поиск в очереди" placeholder="Поиск"><div id="queue"></div></aside><section id="record">Выберите запись.</section></div>
+<p id="status" role="status"></p></main>
+<script>
+const token="__LOCAL_TOKEN__";
+const get=id=>document.getElementById(id);
+const record=get("record");
+let rows=[];
+const statuses={needs_review:"Нужна проверка",checking:"Ожидает обработки",stale:"Устарело",ready:"Нужна сверка фото"};
+function node(tag,text,parent,attrs={}){
+  const item=document.createElement(tag);item.textContent=text;Object.assign(item,attrs);parent.append(item);return item;
+}
+function link(parent,url){
+  if(typeof url==="string"&&url.startsWith("https://"))node("a",url,parent,{href:url,target:"_blank",rel:"noopener"});
+}
+function drawQueue(){
+  const q=get("search").value.trim().toLowerCase();
+  get("queue").replaceChildren();
+  for(const row of rows.filter(row=>`${row.name||""} ${row.id}`.toLowerCase().includes(q))){
+    const btn=node("button",row.name||row.id,get("queue"));
+    node("br","",btn);node("small",statuses[row.state]||row.state,btn);
+    btn.onclick=()=>openPlace(row.id).catch(showError);
+  }
+}
+async function json(url,options){
+  const response=await fetch(url,options);
+  const data=await response.json();
+  if(!response.ok)throw Error(data.error);
+  return data;
+}
+async function load(){
+  rows=await json("/queue");get("count").textContent=`${rows.length} в очереди`;drawQueue();
+}
+function showError(error){get("status").textContent=error.message;}
+async function openPlace(id){
+  const value=await json("/place/"+encodeURIComponent(id));
+  const place=value.data||value.raw;
+  record.replaceChildren();
+  node("h2",place.name||id,record);
+  node("p",`${place.category||"Категория уточняется"} · ${place.address||"Уточнить адрес"} · ${place.lat}, ${place.lon}`,record);
+  const stateLabels={unknown:"неизвестно",matched:"сопоставлено",manual:"подтверждено редактором",
+    unconfirmed:"нужно подтверждение",present:"указан",area:"площадной объект",missing:"нет сведений",
+    review:"нужна сверка",approved:"подтверждено"};
+  const fields={identity:"Идентичность",address:"Адрес",hours:"Режим работы",price:"Стоимость",photos:"Фотографии"};
+  const chips=Object.entries(fields).map(([key,title])=>title+": "+(stateLabels[place.signals?.[key]]||"ожидает проверки"));
+  node("p",chips.join(" · "),record);
+  for(const f of place.findings||[])node("p",f,record);
+  const history=node("details","",record);
+  node("summary","Журнал и сообщения API",history);
+  for(const e of value.events)node("p",`${e.at} · ${e.reason}`,history);
+  const sources=node("details","",record,{open:true});
+  node("summary","Источники",sources);
+  for(const url of new Set([place.source,place.coordinate_source,place.website,...value.facts.map(f=>f.source)])){
+    link(node("p","",sources),url);
+  }
+  const diff=node("details","",record);
+  node("summary","Сравнить исходные, опубликованные и новые сведения",diff);
+  node("pre",JSON.stringify({published:value.initial,raw:value.raw,processed:place,evidence:value.facts},null,2),diff);
+  const picks=[];
+  for(const photo of place.gallery||[]){
+    const line=node("p","",record);
+    if(/^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(photo.url))node("img","",line,{src:photo.url,alt:"Фото кандидата"});
+    const label=node("label","Подтвердить, что это фото объекта · "+photo.author,line);
+    picks.push([photo.source,node("input","",label,{type:"checkbox",checked:Boolean(photo.confirmed)})]);
+    link(node("p","",line),photo.source);link(node("p","",line),photo.license);
+  }
+  const form=node("form","",record);
+  const label=node("label","Поля карточки и источник (JSON)",form);
+  const keys=["name","category","address","lat","lon","hours","price","description","website","source","coordinate_source"];
+  const edit=node("textarea","",label,{value:JSON.stringify(Object.fromEntries(keys.map(k=>[k,place[k]??null]).concat([["permission_photos",(place.gallery||[]).filter(p=>p.method==="manual_permission")]])),null,2)});
+  const reason=node("input","",node("label","Причина решения ",form),{required:true,placeholder:"Что и по какому источнику сверено"});
+  const target=node("input","",node("label","ID основной карточки для объединения ",form),{placeholder:"Например osm:way:123"});
+  const tools=node("div","",form,{className:"tools"});
+  for(const [action,title] of [["approve","Подтвердить"],["correct","Исправить"],["reject","Отклонить"],["defer","Отложить"],["merge","Объединить дубли"]]){
+    node("button",title,tools,{type:"submit",value:action});
+  }
+  form.onsubmit=async event=>{
+    event.preventDefault();
+    const action=event.submitter.value;
+    try{
+      const change=["approve","correct"].includes(action)?JSON.parse(edit.value):{};
+      await json("/decision",{method:"POST",headers:{"Content-Type":"application/json","X-Review-Token":token},
+        body:JSON.stringify({id,action,change:{...change,reason:reason.value,target:target.value.trim(),photos:picks.filter(([,c])=>c.checked).map(([src])=>src)}})});
+      get("status").textContent="Решение сохранено.";
+      record.textContent="Выберите следующую запись.";
+      await load();
+    }catch(error){showError(error);}
+  };
+}
+get("search").addEventListener("input",drawQueue);
+load().catch(showError);
+</script></html>
+

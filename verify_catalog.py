@@ -17,19 +17,23 @@ def request(url, data=None, method=None):
     return urlopen(Request(url, data=data, method=method, headers={"User-Agent": AGENT}), timeout=42)
 
 
-def discover():
+def discover(fetch=None):
     query = """[out:json][timeout:25];
     (nwr["name"]["tourism"~"^(museum|gallery|attraction|viewpoint)$"](54.54,39.55,54.75,39.92);
      nwr["name"]["amenity"~"^(theatre|cinema|cafe|restaurant)$"](54.54,39.55,54.75,39.92);
      nwr["name"]["leisure"~"^(park|garden)$"](54.54,39.55,54.75,39.92););
     out center;"""
-    with request(OVERPASS, urlencode({"data": query}).encode()) as response:
-        result = json.load(response)
+    payload = urlencode({"data": query}).encode()
+    if fetch:
+        result = json.loads(fetch(OVERPASS, payload))
+    else:
+        with request(OVERPASS, payload) as response:
+            result = json.load(response)
     if result.get("remark"):
         raise ValueError(result["remark"])
     for element in result["elements"]:
         tags = element.get("tags", {})
-        if tags.get("access") in {"private", "no"} or any(k.startswith(("disused:", "abandoned:", "demolished:", "was:", "construction:")) for k in tags):
+        if tags.get("access") in {"private", "no"}:
             continue
         coords = element.get("center", element)
         lat, lon = coords.get("lat"), coords.get("lon")
@@ -40,13 +44,25 @@ def discover():
                    address=", ".join(filter(None, (tags.get("addr:street"), tags.get("addr:housenumber")))),
                    category_hint=tags.get("tourism") or tags.get("leisure") or tags.get("amenity"),
                    hours=tags.get("opening_hours"), website=tags.get("website") or tags.get("contact:website"),
-                   wikidata=tags.get("wikidata"), commons=tags.get("wikimedia_commons"),
+                   wikidata=tags.get("wikidata"), commons=tags.get("wikimedia_commons"), tags=tags,
                    source=f"https://www.openstreetmap.org/{kind}/{osm_id}", collected_on=date.today().isoformat(),
                    verified=False)
 
 
 def https(url):
     return bool(url and urlsplit(url).scheme == "https" and urlsplit(url).hostname)
+
+
+def photo_allowed(photo):
+    if photo.get("license") == "permission":
+        return bool(photo.get("author") and photo.get("attribution") and https(photo.get("source"))
+                    and https(photo.get("url")) and https(photo.get("permission_url")) and https(photo.get("license_url"))
+                    and photo.get("checked_on") and photo.get("method")=="manual_permission")
+    license_ok = re.fullmatch(r"https://creativecommons\.org/(?:licenses/(?:by|by-sa)/[1-4]\.0(?:/[a-z-]+)?|publicdomain/zero/1\.0)/?", photo.get("license") or "")
+    return bool(photo.get("author") and https(photo.get("url")) and https(photo.get("source"))
+                and urlsplit(photo["source"]).hostname == "commons.wikimedia.org"
+                and urlsplit(photo["url"]).hostname in {"upload.wikimedia.org", "thumb.wikimedia.org"}
+                and license_ok)
 
 
 def audit(places):
@@ -58,21 +74,27 @@ def audit(places):
         ids.add(p["id"])
         if not p.get("verified"):
             continue
-        if not (54.54 <= p["lat"] <= 54.75 and 39.55 <= p["lon"] <= 39.92):
+        if (type(p.get("lat")) not in (float,int) or type(p.get("lon")) not in (float,int)
+                or not (54.54 <= p["lat"] <= 54.75 and 39.55 <= p["lon"] <= 39.92)):
             raise ValueError(f"Coordinates outside Ryazan: {p['id']}")
-        if not all(p.get(key) for key in ("name", "category", "description", "address", "verified_on")):
+        if not all(p.get(key) for key in ("name", "category", "address", "verified_on")):
             raise ValueError(f"Missing verification fields: {p['id']}")
         date.fromisoformat(p["verified_on"])
-        if not https(p.get("source")) or not https(p.get("coordinate_source")):
+        if p["category"] not in {"culture","nature","food","fun","active","unusual"}:
+            raise ValueError(f"Invalid category: {p['id']}")
+        price=p.get("price")
+        if price is not None and (type(price) not in (int,float) or not 0 <= price < float("inf")):
+            raise ValueError(f"Invalid price: {p['id']}")
+        if (not https(p.get("source")) or not https(p.get("coordinate_source"))
+                or p.get("website") and not https(p["website"])):
             raise ValueError(f"Missing source: {p['id']}")
         gallery = p.get("gallery", [])
-        if not 1 <= len(gallery) <= 3 or len({x["source"] for x in gallery}) != len(gallery):
+        if p.get("photo") != (gallery[0] if gallery else None):
+            raise ValueError(f"Cover differs from approved gallery: {p['id']}")
+        if len(gallery) > 3 or len({x["source"] for x in gallery}) != len(gallery):
             raise ValueError(f"Missing or repeated photos: {p['id']}")
         for photo in gallery:
-            if not (photo.get("author") and https(photo.get("url")) and https(photo.get("source"))
-                    and urlsplit(photo["source"]).hostname == "commons.wikimedia.org"
-                    and urlsplit(photo["url"]).hostname in {"upload.wikimedia.org", "thumb.wikimedia.org"}
-                    and re.fullmatch(r"https://creativecommons\.org/(?:licenses/(?:by|by-sa)/[1-4]\.0(?:/[a-z-]+)?|publicdomain/zero/1\.0)/?", photo.get("license", ""))):
+            if not photo_allowed(photo):
                 raise ValueError(f"Missing image attribution or supported license: {p['id']}")
         verified.append(p)
     if not verified:
@@ -82,7 +104,7 @@ def audit(places):
 
 def audit_online(verified):
     titles = [unquote(urlsplit(x["source"]).path.removeprefix("/wiki/")).replace("_", " ")
-              for p in verified for x in p["gallery"]]
+              for p in verified for x in p["gallery"] if x["license"]!="permission"]
     current_licenses = {}
     for offset in range(0, len(titles), 20):
         api = "https://commons.wikimedia.org/w/api.php?" + urlencode(
@@ -100,10 +122,15 @@ def audit_online(verified):
             if response.status != 200:
                 raise ValueError(f"Unavailable source: {place['id']}")
         for photo in place["gallery"]:
-            title = unquote(urlsplit(photo["source"]).path.removeprefix("/wiki/")).replace("_", " ")
-            actual = current_licenses.get(title, "").replace("http://", "https://").rstrip("/")
-            if actual != photo["license"].rstrip("/"):
-                raise ValueError(f"License changed for {title}")
+            if photo["license"] == "permission":
+                with request(photo["permission_url"]) as response:
+                    if response.status != 200:
+                        raise ValueError(f"Unavailable rights document: {photo['source']}")
+            else:
+                title = unquote(urlsplit(photo["source"]).path.removeprefix("/wiki/")).replace("_", " ")
+                actual = current_licenses.get(title, "").replace("http://", "https://").rstrip("/")
+                if actual != photo["license"].rstrip("/"):
+                    raise ValueError(f"License changed for {title}")
             with request(photo["url"], method="HEAD") as response:
                 if response.status != 200 or not response.headers.get_content_type().startswith("image/"):
                     raise ValueError(f"Unavailable photo: {photo['source']}")
