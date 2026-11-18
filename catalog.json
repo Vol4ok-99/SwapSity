@@ -96,7 +96,8 @@
       "attribution": ""
     },
     "verified_on": "2026-11-18",
-    "coordinate_source": "https://archi.ru/projects/russia/19722/blagoustroistvo-lybedskogo-bulvara"
+    "coordinate_source": "https://archi.ru/projects/russia/19722/blagoustroistvo-lybedskogo-bulvara",
+    "route_to_coordinates": true
   },
   {
     "id": "pavlov",
@@ -5817,23 +5818,53 @@
     "category": "culture",
     "lat": 54.631254,
     "lon": 39.7494397,
-    "address": "Лево-Лыбедская улица, 34",
-    "description": "Театр. Лево-Лыбедская улица, 34.",
+    "address": "ул. Лево-Лыбедская, 34",
+    "description": "Государственный цирк у Лыбедского бульвара. Здесь проходят гастрольные цирковые программы.",
     "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/101850040",
+    "source": "https://www.circus.ru/kontakty/filialy/?qa=%D1%80",
     "license": "https://www.openstreetmap.org/copyright",
     "photo": {
-      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/A-Ryazan_circus_%28cropped%29.JPG/960px-A-Ryazan_circus_%28cropped%29.JPG",
-      "author": "Максим Шанин",
-      "source": "https://commons.wikimedia.org/wiki/File:A-Ryazan_circus_(cropped).JPG",
-      "license": "https://creativecommons.org/licenses/by-sa/3.0",
-      "license_label": "CC BY-SA 3.0",
-      "attribution": ""
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Ryazan_State_Circus_2025-01_1736099008.webp/960px-Ryazan_State_Circus_2025-01_1736099008.webp",
+      "author": "Artyom Svetlov",
+      "source": "https://commons.wikimedia.org/wiki/File:Ryazan_State_Circus_2025-01_1736099008.webp",
+      "license": "https://creativecommons.org/licenses/by/4.0",
+      "license_label": "CC BY 4.0",
+      "attribution": "Artem Svetlov"
     },
     "wikidata": "Q96473308",
     "commons_file": null,
-    "kind": "Театр"
+    "kind": "Цирк",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "coordinate_source": "https://www.openstreetmap.org/way/101850040",
+    "website": "https://www.circus-ryazan.ru/",
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/48/Ryazan_State_Circus_2025-01_1736099008.webp/960px-Ryazan_State_Circus_2025-01_1736099008.webp",
+        "author": "Artyom Svetlov",
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_State_Circus_2025-01_1736099008.webp",
+        "license": "https://creativecommons.org/licenses/by/4.0",
+        "license_label": "CC BY 4.0",
+        "attribution": "Artem Svetlov"
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/A-Ryazan_circus.JPG/960px-A-Ryazan_circus.JPG",
+        "author": "Максим Шанин",
+        "source": "https://commons.wikimedia.org/wiki/File:A-Ryazan_circus.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/AA-Ryazan_circus.JPG/960px-AA-Ryazan_circus.JPG",
+        "author": "Максим Шанин",
+        "source": "https://commons.wikimedia.org/wiki/File:AA-Ryazan_circus.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:way:101851275",
@@ -5841,16 +5872,53 @@
     "category": "culture",
     "lat": 54.6335296,
     "lon": 39.7426718,
-    "address": "Соборная улица, 16",
-    "description": "Театр. Соборная улица, 16.",
-    "hours": "Tu-Sa 10:30-18:00; Su 10:30-16:00",
+    "address": "ул. Соборная, 16",
+    "description": "Театр на Соборной ставит спектакли для детей и взрослых. Для визита можно выбрать представление в афише.",
+    "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/101851275",
+    "source": "https://www.ukrzn.ru/?id=10&mod=institutions",
     "license": "https://www.openstreetmap.org/copyright",
-    "photo": null,
+    "photo": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D0%BD%D0%B0_%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%BE%D0%B9.JPG/960px-%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D0%BD%D0%B0_%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%BE%D0%B9.JPG",
+      "author": "Garrysoon",
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D0%BD%D0%B0_%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%BE%D0%B9.JPG",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0",
+      "license_label": "CC BY-SA 3.0",
+      "attribution": ""
+    },
     "wikidata": null,
     "commons_file": null,
-    "kind": "Театр"
+    "kind": "Театр",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "coordinate_source": "https://www.openstreetmap.org/way/101851275",
+    "website": null,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D0%BD%D0%B0_%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%BE%D0%B9.JPG/960px-%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D0%BD%D0%B0_%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%BE%D0%B9.JPG",
+        "author": "Garrysoon",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D0%BD%D0%B0_%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%BE%D0%B9.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D1%8E%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B7%D1%80%D0%B8%D1%82%D0%B5%D0%BB%D1%8F.jpg/960px-%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D1%8E%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B7%D1%80%D0%B8%D1%82%D0%B5%D0%BB%D1%8F.jpg",
+        "author": "Sofiya Kiparisova",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D1%8E%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B7%D1%80%D0%B8%D1%82%D0%B5%D0%BB%D1%8F.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D1%8E%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B7%D1%80%D0%B8%D1%82%D0%B5%D0%BB%D1%8F%2C_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.JPG/960px-%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D1%8E%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B7%D1%80%D0%B8%D1%82%D0%B5%D0%BB%D1%8F%2C_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.JPG",
+        "author": "KirillKoriakin",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A2%D0%B5%D0%B0%D1%82%D1%80_%D1%8E%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B7%D1%80%D0%B8%D1%82%D0%B5%D0%BB%D1%8F,_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:way:102134869",
@@ -5909,23 +5977,45 @@
     "category": "culture",
     "lat": 54.6224963,
     "lon": 39.7432963,
-    "address": "улица Свободы, 79",
-    "description": "Музей. улица Свободы, 79.",
-    "hours": "Mo,We,Fr,Sa 10:00-18:00; Tu,Th 13:00-21:00",
+    "address": "ул. Свободы, 79",
+    "description": "Музей в бывшей резиденции рязанского губернатора. Экспозиции посвящены истории Рязанского края и жизни его жителей.",
+    "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/105571167",
+    "source": "https://mimdrzn.ru/museum/contacts",
     "license": "https://www.openstreetmap.org/copyright",
     "photo": {
-      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/18/Ryazan_20231010_204229.jpg/960px-Ryazan_20231010_204229.jpg",
-      "author": "Bogdanov-62",
-      "source": "https://commons.wikimedia.org/wiki/File:Ryazan_20231010_204229.jpg",
-      "license": "https://creativecommons.org/licenses/by-sa/4.0",
-      "license_label": "CC BY-SA 4.0",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B%2C_79.JPG/960px-%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B%2C_79.JPG",
+      "author": "Shavyrm",
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B,_79.JPG",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0",
+      "license_label": "CC BY-SA 3.0",
       "attribution": ""
     },
     "wikidata": "Q122988172",
     "commons_file": null,
-    "kind": "Музей"
+    "kind": "Музей",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "coordinate_source": "https://www.openstreetmap.org/way/105571167",
+    "website": "https://mimdrzn.ru/",
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B%2C_79.JPG/960px-%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B%2C_79.JPG",
+        "author": "Shavyrm",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B,_79.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/Ryazan_20231010_204204.jpg/960px-Ryazan_20231010_204204.jpg",
+        "author": "Bogdanov-62",
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_20231010_204204.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:way:105571798",

@@ -113,6 +113,10 @@ function openDialog(html){
   dialog.innerHTML=btn("close","Закрыть","","close")+html;
   if(!dialog.open)dialog.showModal();
 }
+function yandexRoute(place){
+  const destination=place.address&&!place.route_to_coordinates?`Рязань, ${place.address}`:`${place.lat},${place.lon}`;
+  return `https://yandex.ru/maps/?mode=routes&rtext=~${encodeURIComponent(destination)}`;
+}
 function details(p){
   if(!p)return;
   const query=encodeURIComponent([p.name,"Рязань",p.address].filter(Boolean).join(", "));
@@ -133,9 +137,11 @@ function details(p){
       <div class="sheet-title"><span>${esc(p.kind||cats[p.category])}</span><h2>${esc(p.name)}</h2></div>
       <p class="sheet-description">${esc(p.description)}</p>
       ${p.verified?"":'<p class="hint">Адрес этой сохранённой карточки пока не перепроверен.</p>'}
+      ${p.verified?`<div class="place-route">
+        <a class="route-link" href="${esc(yandexRoute(p))}" target="_blank" rel="noopener">Проложить маршрут <span>↗</span></a>
+        <span class="hint">Яндекс Карты · ${esc(p.address)}</span></div>`:""}
       <details class="place-more"><summary>Подробнее</summary>
         <dl>${facts.filter(([,value])=>value).map(([label,value])=>`<div><dt>${label}</dt><dd>${esc(value)}</dd></div>`).join("")}</dl>
-        <a class="route-link" href="https://www.openstreetmap.org/directions?to=${p.lat},${p.lon}" target="_blank" rel="noopener">Построить маршрут <span>↗</span></a>
         <div class="sheet-links"><a href="https://yandex.ru/maps/?text=${query}" target="_blank" rel="noopener">Яндекс Карты</a>
         <a href="https://2gis.ru/ryazan/search/${query}" target="_blank" rel="noopener">2ГИС</a>
         <a href="${link(p.source)}" target="_blank" rel="noopener">Источник сведений</a>${p.coordinate_source?`<a href="${link(p.coordinate_source)}" target="_blank" rel="noopener">Источник координат</a>`:""}${p.website?`<a href="${link(p.website)}" target="_blank" rel="noopener">Официальный сайт</a>`:""}</div>

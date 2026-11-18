@@ -184,3 +184,4 @@ dialog:has(.place-sheet) .close{top:26px;margin-bottom:-49px}
   .map-page .city-attribution{bottom:calc(63px + env(safe-area-inset-bottom))}
   .map-page .city-status{top:calc(113px + env(safe-area-inset-top))}
 }
+.place-route .hint{display:block;margin:6px 0 0}
