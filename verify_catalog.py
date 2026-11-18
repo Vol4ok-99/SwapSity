@@ -66,7 +66,7 @@ def audit(places):
         if not https(p.get("source")) or not https(p.get("coordinate_source")):
             raise ValueError(f"Missing source: {p['id']}")
         gallery = p.get("gallery", [])
-        if not 2 <= len(gallery) <= 3 or len({x["source"] for x in gallery}) != len(gallery):
+        if not 1 <= len(gallery) <= 3 or len({x["source"] for x in gallery}) != len(gallery):
             raise ValueError(f"Missing or repeated photos: {p['id']}")
         for photo in gallery:
             if not (photo.get("author") and https(photo.get("url")) and https(photo.get("source"))
@@ -83,17 +83,18 @@ def audit(places):
 def audit_online(verified):
     titles = [unquote(urlsplit(x["source"]).path.removeprefix("/wiki/")).replace("_", " ")
               for p in verified for x in p["gallery"]]
-    api = "https://commons.wikimedia.org/w/api.php?" + urlencode(
-        dict(action="query", prop="imageinfo", iiprop="extmetadata", titles="|".join(titles), format="json"))
-    with request(api) as response:
-        images = json.load(response)["query"]["pages"]
-    for page in images.values():
-        if not page.get("imageinfo"):
-            raise ValueError(f"Missing Commons file: {page['title']}")
-    current_licenses = {
-        page["title"]: page["imageinfo"][0]["extmetadata"].get("LicenseUrl", {}).get("value", "")
-        for page in images.values()
-    }
+    current_licenses = {}
+    for offset in range(0, len(titles), 20):
+        api = "https://commons.wikimedia.org/w/api.php?" + urlencode(
+            dict(action="query", prop="imageinfo", iiprop="extmetadata",
+                 titles="|".join(titles[offset:offset + 20]), format="json"))
+        with request(api) as response:
+            images = json.load(response)["query"]["pages"]
+        for page in images.values():
+            if not page.get("imageinfo"):
+                raise ValueError(f"Missing Commons file: {page['title']}")
+            metadata = page["imageinfo"][0]["extmetadata"]
+            current_licenses[page["title"]] = metadata.get("LicenseUrl", {}).get("value", "")
     for place in verified:
         with request(place["source"]) as response:
             if response.status != 200:

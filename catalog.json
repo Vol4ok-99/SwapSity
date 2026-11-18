@@ -157,9 +157,41 @@
     "lat": 54.626111,
     "lon": 39.749722,
     "address": "ул. Ленина, у филармонии",
-    "description": "Памятник Ивану Павлову стоит на улице Ленина, перед зданием областной филармонии.",
-    "source": "https://ru.wikipedia.org/wiki/Памятник_И._П._Павлову_(Рязань)",
-    "price": 0
+    "description": "Памятник Ивану Павлову установлен в 1949 году в сквере у филармонии.",
+    "source": "https://www.ukrzn.ru/?id=352&mod=pages",
+    "price": null,
+    "coordinate_source": "https://ru.wikipedia.org/wiki/Памятник_И._П._Павлову_(Рязань)",
+    "kind": "Памятник",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": true,
+    "photo": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%83_2026.jpg/960px-%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%83_2026.jpg",
+      "author": "Serhiomatviavelli",
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%83_2026.jpg",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "attribution": ""
+    },
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%83_2026.jpg/960px-%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%83_2026.jpg",
+        "author": "Serhiomatviavelli",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C_%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2%D1%83_2026.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C._%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2_-_panoramio.jpg",
+        "author": "Дмитрий Мозжухин",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C._%D0%9F%D0%B0%D0%B2%D0%BB%D0%BE%D0%B2_-_panoramio.jpg",
+        "license": "https://creativecommons.org/licenses/by/3.0",
+        "license_label": "CC BY 3.0",
+        "attribution": "Дмитрий Мозжухин"
+      }
+    ],
+    "hours": null
   },
   {
     "id": "theatre-square",
@@ -168,9 +200,41 @@
     "lat": 54.621944,
     "lon": 39.756667,
     "address": "Театральная площадь",
-    "description": "Городская площадь перед областным театром драмы, на пересечении улиц Ленина, Есенина и Циолковского.",
-    "source": "https://ru.wikipedia.org/wiki/Театральная_площадь_(Рязань)",
-    "price": 0
+    "description": "Площадь перед областным театром драмы на пересечении улиц Ленина, Есенина и Циолковского.",
+    "source": "https://rzndrama.ru/",
+    "price": null,
+    "coordinate_source": "https://ru.wikipedia.org/wiki/Театральная_площадь_(Рязань)",
+    "kind": "Площадь",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": true,
+    "photo": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Ryazan_Teatralnaya_square_2024-05_1715424148.tif/lossy-page1-960px-Ryazan_Teatralnaya_square_2024-05_1715424148.tif.jpg",
+      "author": "Artyom Svetlov",
+      "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Teatralnaya_square_2024-05_1715424148.tif",
+      "license": "https://creativecommons.org/licenses/by/4.0",
+      "license_label": "CC BY 4.0",
+      "attribution": "Artem Svetlov"
+    },
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Ryazan_Teatralnaya_square_2024-05_1715424148.tif/lossy-page1-960px-Ryazan_Teatralnaya_square_2024-05_1715424148.tif.jpg",
+        "author": "Artyom Svetlov",
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Teatralnaya_square_2024-05_1715424148.tif",
+        "license": "https://creativecommons.org/licenses/by/4.0",
+        "license_label": "CC BY 4.0",
+        "attribution": "Artem Svetlov"
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/%D0%92%D0%B8%D0%B4_%D0%BD%D0%B0_%D0%AF%D0%BC%D1%81%D0%BA%D1%83%D1%8E_%D0%9F%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C.jpg/960px-%D0%92%D0%B8%D0%B4_%D0%BD%D0%B0_%D0%AF%D0%BC%D1%81%D0%BA%D1%83%D1%8E_%D0%9F%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C.jpg",
+        "author": "Вадим55555",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%92%D0%B8%D0%B4_%D0%BD%D0%B0_%D0%AF%D0%BC%D1%81%D0%BA%D1%83%D1%8E_%D0%9F%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      }
+    ],
+    "hours": null
   },
   {
     "id": "osm:node:10311517509",
@@ -4088,11 +4152,11 @@
     "category": "unusual",
     "lat": 54.6287638,
     "lon": 39.7442887,
-    "address": "",
-    "description": "Достопримечательность. 380 м от центра Рязани.",
+    "address": "ул. Ленина, 53",
+    "description": "Здание бывшей Первой мужской гимназии на углу Ленина и Право-Лыбедской. Исторический фасад можно осмотреть с улицы.",
     "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/node/5075442411",
+    "source": "https://sias.ru/upload/iblock/849/ryazanskaya-oblast-_nz.kach_vo_.pdf",
     "license": "https://www.openstreetmap.org/copyright",
     "photo": {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%B8%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83%D1%82%2C_%D1%83%D0%B3%D0%BE%D0%BB_%D0%9F%D1%80%D0%B0%D0%B2%D0%BE%D0%BB%D1%8B%D0%B1%D0%B5%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%2826%29_%D0%B8_%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_%D1%83%D0%BB%D0%B8%D1%86_%2853%29_-1.JPG/960px-%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%B8%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83%D1%82%2C_%D1%83%D0%B3%D0%BE%D0%BB_%D0%9F%D1%80%D0%B0%D0%B2%D0%BE%D0%BB%D1%8B%D0%B1%D0%B5%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%2826%29_%D0%B8_%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_%D1%83%D0%BB%D0%B8%D1%86_%2853%29_-1.JPG",
@@ -4104,7 +4168,21 @@
     },
     "wikidata": "Q125934751",
     "commons_file": null,
-    "kind": "Достопримечательность"
+    "kind": "Историческое здание",
+    "coordinate_source": "https://www.openstreetmap.org/node/5075442411",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": false,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%B8%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83%D1%82%2C_%D1%83%D0%B3%D0%BE%D0%BB_%D0%9F%D1%80%D0%B0%D0%B2%D0%BE%D0%BB%D1%8B%D0%B1%D0%B5%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%2826%29_%D0%B8_%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_%D1%83%D0%BB%D0%B8%D1%86_%2853%29_-1.JPG/960px-%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%B8%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83%D1%82%2C_%D1%83%D0%B3%D0%BE%D0%BB_%D0%9F%D1%80%D0%B0%D0%B2%D0%BE%D0%BB%D1%8B%D0%B1%D0%B5%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%2826%29_%D0%B8_%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_%D1%83%D0%BB%D0%B8%D1%86_%2853%29_-1.JPG",
+        "author": "KirillKoriakin",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%BE%D0%BB%D0%B8%D1%82%D0%B5%D1%85%D0%BD%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%B8%D0%BD%D1%81%D1%82%D0%B8%D1%82%D1%83%D1%82,_%D1%83%D0%B3%D0%BE%D0%BB_%D0%9F%D1%80%D0%B0%D0%B2%D0%BE%D0%BB%D1%8B%D0%B1%D0%B5%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_(26)_%D0%B8_%D0%90%D1%81%D1%82%D1%80%D0%B0%D1%85%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_%D1%83%D0%BB%D0%B8%D1%86_(53)_-1.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:node:5075442420",
@@ -5559,11 +5637,11 @@
     "category": "nature",
     "lat": 54.6338243,
     "lon": 39.764676,
-    "address": "",
-    "description": "Парк. 1,2 км от центра Рязани.",
+    "address": "территория Торговый городок",
+    "description": "Торговый городок с павильонами бывшей сельскохозяйственной выставки. Сегодня здесь работают площадки Рязанской ВДНХ.",
     "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/relation/17583674",
+    "source": "https://vdnh-rzn.ru/way",
     "license": "https://www.openstreetmap.org/copyright",
     "photo": {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Shopping_town.jpg/960px-Shopping_town.jpg",
@@ -5575,7 +5653,21 @@
     },
     "wikidata": "Q113554351",
     "commons_file": null,
-    "kind": "Парк"
+    "kind": "Выставочный комплекс",
+    "coordinate_source": "https://www.openstreetmap.org/relation/17583674",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": true,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Shopping_town.jpg/960px-Shopping_town.jpg",
+        "author": "Xardaas",
+        "source": "https://commons.wikimedia.org/wiki/File:Shopping_town.jpg",
+        "license": "https://creativecommons.org/licenses/by/4.0",
+        "license_label": "CC BY 4.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:relation:2233275",
@@ -5736,11 +5828,11 @@
     "category": "unusual",
     "lat": 54.6301619,
     "lon": 39.7559674,
-    "address": "улица Свободы, 39",
-    "description": "Достопримечательность. улица Свободы, 39.",
+    "address": "ул. Свободы, 39",
+    "description": "Деревянный дом с башенкой в стиле модерн. Башню и резные детали фасада можно увидеть с улицы.",
     "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/100951234",
+    "source": "https://culture62.ru/object/zhilye-doma-xix-v/",
     "license": "https://www.openstreetmap.org/copyright",
     "photo": {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B%2C_39_%28%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%29.jpg/960px-%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B%2C_39_%28%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%29.jpg",
@@ -5752,7 +5844,21 @@
     },
     "wikidata": "Q125934589",
     "commons_file": null,
-    "kind": "Достопримечательность"
+    "kind": "Историческое здание",
+    "coordinate_source": "https://www.openstreetmap.org/way/100951234",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": false,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B%2C_39_%28%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%29.jpg/960px-%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B%2C_39_%28%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%29.jpg",
+        "author": "Zombierzn",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D0%B2%D0%BE%D0%B1%D0%BE%D0%B4%D1%8B,_39_(%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C).jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:way:101155397",
@@ -5760,8 +5866,8 @@
     "category": "culture",
     "lat": 54.6264246,
     "lon": 39.7503176,
-    "address": "улица Ленина, 26",
-    "description": "Театр. улица Ленина, 26.",
+    "address": "ул. Ленина, 26",
+    "description": "Рязанская областная филармония. Концертный зал расположен рядом с памятником Ивану Павлову; программу публикует филармония.",
     "hours": null,
     "price": null,
     "source": "https://www.openstreetmap.org/way/101155397",
@@ -5776,7 +5882,7 @@
     },
     "wikidata": "Q94791582",
     "commons_file": null,
-    "kind": "Театр"
+    "kind": "Концертный зал"
   },
   {
     "id": "osm:way:101158004",
@@ -6142,16 +6248,53 @@
     "category": "nature",
     "lat": 54.633745,
     "lon": 39.7455595,
-    "address": "",
-    "description": "Парк. 200 м от центра Рязани.",
+    "address": "Соборная площадь, у Глебовского моста",
+    "description": "Зелёная зона на подходе к кремлю. Из парка можно пройти к Глебовскому мосту и Соборной колокольне.",
     "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/109077042",
+    "source": "https://gorod.ryazan.ru/ryazan/chto-posmotret-v-ryazani/",
     "license": "https://www.openstreetmap.org/copyright",
-    "photo": null,
+    "photo": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Cathedral-park-1.jpg/960px-Cathedral-park-1.jpg",
+      "author": "Xardaas",
+      "source": "https://commons.wikimedia.org/wiki/File:Cathedral-park-1.jpg",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "attribution": ""
+    },
     "wikidata": "Q127272272",
     "commons_file": null,
-    "kind": "Парк"
+    "kind": "Парк",
+    "coordinate_source": "https://www.openstreetmap.org/way/109077042",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": true,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/85/Cathedral-park-1.jpg/960px-Cathedral-park-1.jpg",
+        "author": "Xardaas",
+        "source": "https://commons.wikimedia.org/wiki/File:Cathedral-park-1.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Cathedral-park-3.jpg/960px-Cathedral-park-3.jpg",
+        "author": "Xardaas",
+        "source": "https://commons.wikimedia.org/wiki/File:Cathedral-park-3.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Cathedral-park-5.jpg/960px-Cathedral-park-5.jpg",
+        "author": "Xardaas",
+        "source": "https://commons.wikimedia.org/wiki/File:Cathedral-park-5.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:way:109508298",
@@ -6176,11 +6319,11 @@
     "category": "unusual",
     "lat": 54.6355341,
     "lon": 39.7478499,
-    "address": "улица Кремль, 10",
-    "description": "Достопримечательность. улица Кремль, 10.",
+    "address": "ул. Кремль, 10",
+    "description": "Высокая колокольня в стиле классицизма у Глебовского моста.",
     "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/109731619",
+    "source": "https://ryazankreml.ru/visitors/8/objects/",
     "license": "https://www.openstreetmap.org/copyright",
     "photo": {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BA%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE%D0%BB%D1%8C%D0%BD%D1%8F%2C_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg/960px-%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BA%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE%D0%BB%D1%8C%D0%BD%D1%8F%2C_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg",
@@ -6192,7 +6335,37 @@
     },
     "wikidata": "Q4426073",
     "commons_file": null,
-    "kind": "Достопримечательность"
+    "kind": "Колокольня",
+    "coordinate_source": "https://www.openstreetmap.org/way/109731619",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": true,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3e/%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BA%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE%D0%BB%D1%8C%D0%BD%D1%8F%2C_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg/960px-%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BA%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE%D0%BB%D1%8C%D0%BD%D1%8F%2C_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg",
+        "author": "Seryogin100",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BA%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE%D0%BB%D1%8C%D0%BD%D1%8F,_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Belltower_Ryazan_Kremlin_11.jpg/960px-Belltower_Ryazan_Kremlin_11.jpg",
+        "author": "Xardaas",
+        "source": "https://commons.wikimedia.org/wiki/File:Belltower_Ryazan_Kremlin_11.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e4/%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BA%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE%D0%BB%D1%8C%D0%BD%D1%8F_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BA%D1%80%D0%B5%D0%BC%D0%BB%D1%8F.jpg/960px-%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BA%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE%D0%BB%D1%8C%D0%BD%D1%8F_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BA%D1%80%D0%B5%D0%BC%D0%BB%D1%8F.jpg",
+        "author": "Софья Новикова",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BA%D0%BE%D0%BB%D0%BE%D0%BA%D0%BE%D0%BB%D1%8C%D0%BD%D1%8F_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BA%D1%80%D0%B5%D0%BC%D0%BB%D1%8F.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:way:109731622",
@@ -6200,11 +6373,11 @@
     "category": "unusual",
     "lat": 54.6361394,
     "lon": 39.7489214,
-    "address": "улица Кремль, 13",
-    "description": "Достопримечательность. улица Кремль, 13.",
+    "address": "ул. Кремль, 13",
+    "description": "Летний кафедральный собор Рязанского кремля. Его построили в конце XVII века; внутри сохранился многоярусный иконостас.",
     "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/109731622",
+    "source": "https://ryazeparh.ru/eparhiya/khramy/10714-uspenskij-kafedralnyj-sobor-ryazani",
     "license": "https://www.openstreetmap.org/copyright",
     "photo": {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/%D0%A3%D1%81%D0%BF%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D1%81%D0%BE%D0%B1%D0%BE%D1%80%2C_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg/960px-%D0%A3%D1%81%D0%BF%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D1%81%D0%BE%D0%B1%D0%BE%D1%80%2C_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg",
@@ -6216,7 +6389,21 @@
     },
     "wikidata": "Q2018776",
     "commons_file": null,
-    "kind": "Достопримечательность"
+    "kind": "Собор",
+    "coordinate_source": "https://www.openstreetmap.org/way/109731622",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": false,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/%D0%A3%D1%81%D0%BF%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D1%81%D0%BE%D0%B1%D0%BE%D1%80%2C_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg/960px-%D0%A3%D1%81%D0%BF%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D1%81%D0%BE%D0%B1%D0%BE%D1%80%2C_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg",
+        "author": "Seryogin100",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A3%D1%81%D0%BF%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D1%81%D0%BE%D0%B1%D0%BE%D1%80,_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:way:109731623",
@@ -6224,11 +6411,11 @@
     "category": "unusual",
     "lat": 54.6365571,
     "lon": 39.7485424,
-    "address": "улица Кремль, 14",
-    "description": "Достопримечательность. улица Кремль, 14.",
+    "address": "ул. Кремль, 14",
+    "description": "Один из древнейших храмов Рязанского кремля. Современный облик собора сложился после перестроек.",
     "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/109731623",
+    "source": "https://rznsobor.cerkov.ru/main-page/",
     "license": "https://www.openstreetmap.org/copyright",
     "photo": {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Church_of_the_Nativity_of_Christ_Ryazan_0073.JPG/960px-Church_of_the_Nativity_of_Christ_Ryazan_0073.JPG",
@@ -6240,7 +6427,21 @@
     },
     "wikidata": "Q4501497",
     "commons_file": null,
-    "kind": "Достопримечательность"
+    "kind": "Собор",
+    "coordinate_source": "https://www.openstreetmap.org/way/109731623",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": false,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/Church_of_the_Nativity_of_Christ_Ryazan_0073.JPG/960px-Church_of_the_Nativity_of_Christ_Ryazan_0073.JPG",
+        "author": "Nzeemin",
+        "source": "https://commons.wikimedia.org/wiki/File:Church_of_the_Nativity_of_Christ_Ryazan_0073.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:way:109731624",
@@ -6248,11 +6449,11 @@
     "category": "unusual",
     "lat": 54.6365455,
     "lon": 39.7493496,
-    "address": "улица Кремль, 12",
-    "description": "Достопримечательность. улица Кремль, 12.",
+    "address": "ул. Кремль, 12",
+    "description": "Небольшой собор между Дворцом Олега и Успенским собором. Исторически служил усыпальницей рязанских архиереев.",
     "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/109731624",
+    "source": "https://ryazeparh.ru/eparhiya/khramy/10715-arkhangelskij-sobor-ryazanskogo-kremlya",
     "license": "https://www.openstreetmap.org/copyright",
     "photo": {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/RyazanKremlin_ArchangelMichaelCathedral_011_8229.jpg/960px-RyazanKremlin_ArchangelMichaelCathedral_011_8229.jpg",
@@ -6264,7 +6465,21 @@
     },
     "wikidata": "Q96850295",
     "commons_file": null,
-    "kind": "Достопримечательность"
+    "kind": "Собор",
+    "coordinate_source": "https://www.openstreetmap.org/way/109731624",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": false,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/RyazanKremlin_ArchangelMichaelCathedral_011_8229.jpg/960px-RyazanKremlin_ArchangelMichaelCathedral_011_8229.jpg",
+        "author": "Ludvig14",
+        "source": "https://commons.wikimedia.org/wiki/File:RyazanKremlin_ArchangelMichaelCathedral_011_8229.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:way:109731626",
@@ -6272,16 +6487,53 @@
     "category": "culture",
     "lat": 54.6370445,
     "lon": 39.7496184,
-    "address": "улица Кремль, 15",
-    "description": "Музей. улица Кремль, 15.",
-    "hours": "Tu-Su 10:00-18:00; Mo off",
+    "address": "ул. Кремль, 15",
+    "description": "Дворец Олега — бывшие архиерейские палаты Рязанского кремля. На фасаде видны цветные наличники и барочный фронтон.",
+    "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/109731626",
+    "source": "https://ryazankreml.ru/visitors/8/objects/5/",
     "license": "https://www.openstreetmap.org/copyright",
-    "photo": null,
+    "photo": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Oleg_palace_1.JPG/960px-Oleg_palace_1.JPG",
+      "author": "Ivan Marchuk",
+      "source": "https://commons.wikimedia.org/wiki/File:Oleg_palace_1.JPG",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0",
+      "license_label": "CC BY-SA 3.0",
+      "attribution": ""
+    },
     "wikidata": null,
     "commons_file": null,
-    "kind": "Музей"
+    "kind": "Историческое здание",
+    "coordinate_source": "https://www.openstreetmap.org/way/109731626",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": true,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Oleg_palace_1.JPG/960px-Oleg_palace_1.JPG",
+        "author": "Ivan Marchuk",
+        "source": "https://commons.wikimedia.org/wiki/File:Oleg_palace_1.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/19/%D0%94%D0%BE%D0%BC_%D0%B0%D1%80%D1%85%D0%B8%D0%B5%D1%80%D0%B5%D0%B9%D1%81%D0%BA%D0%B8%D0%B9_%28%D0%B4%D0%B2%D0%BE%D1%80%D0%B5%D1%86_%D0%9E%D0%BB%D0%B5%D0%B3%D0%B0%29_1.JPG/960px-%D0%94%D0%BE%D0%BC_%D0%B0%D1%80%D1%85%D0%B8%D0%B5%D1%80%D0%B5%D0%B9%D1%81%D0%BA%D0%B8%D0%B9_%28%D0%B4%D0%B2%D0%BE%D1%80%D0%B5%D1%86_%D0%9E%D0%BB%D0%B5%D0%B3%D0%B0%29_1.JPG",
+        "author": "Ajstalker",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%94%D0%BE%D0%BC_%D0%B0%D1%80%D1%85%D0%B8%D0%B5%D1%80%D0%B5%D0%B9%D1%81%D0%BA%D0%B8%D0%B9_(%D0%B4%D0%B2%D0%BE%D1%80%D0%B5%D1%86_%D0%9E%D0%BB%D0%B5%D0%B3%D0%B0)_1.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%9A%D1%80%D0%B5%D0%BC%D0%BB%D1%8C._%D0%94%D0%B2%D0%BE%D1%80%D0%B5%D1%86_%D0%9E%D0%BB%D0%B5%D0%B3%D0%B0._-_panoramio.jpg/960px-%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%9A%D1%80%D0%B5%D0%BC%D0%BB%D1%8C._%D0%94%D0%B2%D0%BE%D1%80%D0%B5%D1%86_%D0%9E%D0%BB%D0%B5%D0%B3%D0%B0._-_panoramio.jpg",
+        "author": "Natalia Semenova",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%9A%D1%80%D0%B5%D0%BC%D0%BB%D1%8C._%D0%94%D0%B2%D0%BE%D1%80%D0%B5%D1%86_%D0%9E%D0%BB%D0%B5%D0%B3%D0%B0._-_panoramio.jpg",
+        "license": "https://creativecommons.org/licenses/by/3.0",
+        "license_label": "CC BY 3.0",
+        "attribution": "Natalia Semenova"
+      }
+    ]
   },
   {
     "id": "osm:way:109731627",
@@ -6289,16 +6541,45 @@
     "category": "culture",
     "lat": 54.6369849,
     "lon": 39.7502951,
-    "address": "улица Кремль, 18",
-    "description": "Музей. улица Кремль, 18.",
+    "address": "ул. Кремль, 18",
+    "description": "Певческий корпус — памятник гражданской архитектуры XVII века в ансамбле Рязанского кремля.",
     "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/109731627",
+    "source": "https://ryazankreml.ru/visitors/8/objects/7/",
     "license": "https://www.openstreetmap.org/copyright",
-    "photo": null,
+    "photo": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/%D0%9F%D0%B5%D0%B2%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81_%D0%B2_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%BC_%D0%BA%D1%80%D0%B5%D0%BC%D0%BB%D0%B5.JPG/960px-%D0%9F%D0%B5%D0%B2%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81_%D0%B2_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%BC_%D0%BA%D1%80%D0%B5%D0%BC%D0%BB%D0%B5.JPG",
+      "author": "Максим Шанин",
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B5%D0%B2%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81_%D0%B2_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%BC_%D0%BA%D1%80%D0%B5%D0%BC%D0%BB%D0%B5.JPG",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "attribution": ""
+    },
     "wikidata": null,
     "commons_file": null,
-    "kind": "Музей"
+    "kind": "Историческое здание",
+    "coordinate_source": "https://www.openstreetmap.org/way/109731627",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": true,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0d/%D0%9F%D0%B5%D0%B2%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81_%D0%B2_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%BC_%D0%BA%D1%80%D0%B5%D0%BC%D0%BB%D0%B5.JPG/960px-%D0%9F%D0%B5%D0%B2%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81_%D0%B2_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%BC_%D0%BA%D1%80%D0%B5%D0%BC%D0%BB%D0%B5.JPG",
+        "author": "Максим Шанин",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B5%D0%B2%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81_%D0%B2_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%BC_%D0%BA%D1%80%D0%B5%D0%BC%D0%BB%D0%B5.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      },
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2e/%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%9A%D1%80%D0%B5%D0%BC%D0%BB%D1%8C.%D0%9F%D0%B5%D0%B2%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81.JPG/960px-%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%9A%D1%80%D0%B5%D0%BC%D0%BB%D1%8C.%D0%9F%D0%B5%D0%B2%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81.JPG",
+        "author": "Miksam69",
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9_%D0%9A%D1%80%D0%B5%D0%BC%D0%BB%D1%8C.%D0%9F%D0%B5%D0%B2%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BA%D0%BE%D1%80%D0%BF%D1%83%D1%81.JPG",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:way:109731638",
@@ -6357,11 +6638,11 @@
     "category": "unusual",
     "lat": 54.6378052,
     "lon": 39.7502496,
-    "address": "улица Набережная кремля, 19",
-    "description": "Достопримечательность. улица Набережная кремля, 19.",
+    "address": "Трубежная набережная, 19",
+    "description": "Двухшатровая церковь XVII века на краю кремлёвского холма.",
     "hours": null,
     "price": null,
-    "source": "https://www.openstreetmap.org/way/110224799",
+    "source": "https://ryazankreml.ru/visitors/8/objects/4/",
     "license": "https://www.openstreetmap.org/copyright",
     "photo": {
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Ryazan_HolySpiritChurch_011_8283.jpg/960px-Ryazan_HolySpiritChurch_011_8283.jpg",
@@ -6373,7 +6654,21 @@
     },
     "wikidata": "Q65172387",
     "commons_file": null,
-    "kind": "Достопримечательность"
+    "kind": "Исторический храм",
+    "coordinate_source": "https://www.openstreetmap.org/way/110224799",
+    "verified": true,
+    "verified_on": "2026-11-18",
+    "route_to_coordinates": true,
+    "gallery": [
+      {
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Ryazan_HolySpiritChurch_011_8283.jpg/960px-Ryazan_HolySpiritChurch_011_8283.jpg",
+        "author": "Ludvig14",
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_HolySpiritChurch_011_8283.jpg",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "attribution": ""
+      }
+    ]
   },
   {
     "id": "osm:way:111966878",
