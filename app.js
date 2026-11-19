@@ -123,7 +123,7 @@ function yandexRoute(place){
 function details(p){
   if(!p)return;
   const query=encodeURIComponent([p.name,"Рязань",p.address].filter(Boolean).join(", "));
-  const facts=[["Адрес",p.address],["Часы работы",p.hours],["Стоимость",p.price==null?null:p.price?`${p.price} ₽`:"Бесплатно"],["Сверено",p.verified_on]];
+  const facts=[["Адрес",p.address],["Часы работы",p.hours],["Телефон",p.phone],["Стоимость",p.price==null?null:p.price?`${p.price} ₽`:"Бесплатно"],[p.source_type==="osm_import"?"Импорт из OpenStreetMap":"Сверено",p.verified_on]];
   const photos=p.gallery?.length?p.gallery:p.photo?[p.photo]:[];
   openDialog(`<article class="place-sheet">
     <div class="sheet-grip" aria-hidden="true"><span></span></div>

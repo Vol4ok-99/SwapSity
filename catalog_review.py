@@ -37,11 +37,13 @@ class Handler(BaseHTTPRequestHandler):
                               "text/html; charset=utf-8")
         with closing(connect(self.server.db)) as db:
             if path == "/queue":
-                rows = db.execute("""SELECT id, state, json_extract(data,'$.name') name,
-                    json_array_length(json_extract(data,'$.findings')) priority FROM places
-                    WHERE data IS NOT NULL AND (state IN ('needs_review','checking','stale')
-                    OR (state IN ('ready','published') AND json_extract(data,'$.signals.photos')='review'))
-                    ORDER BY CASE state WHEN 'needs_review' THEN 0 WHEN 'ready' THEN 1 ELSE 2 END, priority DESC,id""")
+                rows = db.execute("""SELECT id, state, COALESCE(json_extract(data,'$.name'),json_extract(raw,'$.name')) name,
+                    json_array_length(json_extract(data,'$.findings')) priority,
+                    json_array_length(json_extract(data,'$.gallery')) photos FROM places
+                    WHERE state IN ('discovered','needs_review','checking','stale')
+                    OR (state IN ('ready','published') AND json_extract(data,'$.signals.photos')='review')
+                    ORDER BY CASE WHEN photos>0 AND state IN ('ready','published') THEN 0
+                                  WHEN photos>0 THEN 1 WHEN data IS NOT NULL THEN 2 ELSE 3 END, priority ASC,id""")
                 return self.reply(200,[dict(row) for row in rows])
             if path.startswith("/place/"):
                 pid = unquote(path.removeprefix("/place/"))

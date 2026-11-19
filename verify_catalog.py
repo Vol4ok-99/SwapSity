@@ -17,12 +17,51 @@ def request(url, data=None, method=None):
     return urlopen(Request(url, data=data, method=method, headers={"User-Agent": AGENT}), timeout=42)
 
 
-def discover(fetch=None):
-    query = """[out:json][timeout:25];
-    (nwr["name"]["tourism"~"^(museum|gallery|attraction|viewpoint)$"](54.54,39.55,54.75,39.92);
-     nwr["name"]["amenity"~"^(theatre|cinema|cafe|restaurant)$"](54.54,39.55,54.75,39.92);
-     nwr["name"]["leisure"~"^(park|garden)$"](54.54,39.55,54.75,39.92););
-    out center;"""
+CITY = {"name": "Рязань", "bounds": [54.54, 39.55, 54.75, 39.92], "language": "ru"}
+PLACE_TYPES = {
+    "tourism": {"culture": ("museum", "gallery"), "unusual": ("attraction", "viewpoint", "zoo", "aquarium", "artwork")},
+    "historic": {"culture": ("castle", "manor", "memorial", "monument", "archaeological_site", "ruins", "fort", "building")},
+    "amenity": {"culture": ("theatre", "arts_centre", "library", "community_centre"),
+                "fun": ("cinema", "circus", "planetarium"),
+                "food": ("cafe", "restaurant", "bar", "pub", "food_court", "ice_cream")},
+    "leisure": {"nature": ("park", "garden", "nature_reserve"),
+                "fun": ("water_park", "amusement_arcade", "escape_game"),
+                "active": ("sports_centre", "fitness_centre", "swimming_pool", "ice_rink", "stadium", "bowling_alley", "trampoline_park")},
+    "shop": {"food": ("bakery", "confectionery")},
+    "natural": {"nature": ("beach",)},
+}
+
+
+def city_profile(config):
+    if not isinstance(config,dict):
+        raise ValueError("Настройки города должны быть объектом JSON")
+    name, bounds = config.get("name"), config.get("bounds")
+    language = config.get("language", "ru")
+    if not isinstance(name, str) or not name.strip() or not isinstance(language, str) or not re.fullmatch(r"[a-z]{2,12}", language):
+        raise ValueError("Укажите название города и код языка Википедии")
+    if (not isinstance(bounds, list) or len(bounds) != 4 or
+            any(type(n) not in (int, float) or not -180 <= n <= 180 for n in bounds)):
+        raise ValueError("Границы должны быть списком [юг, запад, север, восток]")
+    south, west, north, east = bounds
+    if not (-90 <= south < north <= 90 and west < east):
+        raise ValueError("Некорректные границы города")
+    return {"name": name.strip(), "bounds": bounds, "language": language}
+
+
+def in_city(point, city=CITY):
+    south, west, north, east = city["bounds"]
+    lat, lon = point.get("lat"), point.get("lon")
+    return type(lat) in (int, float) and type(lon) in (int, float) and south <= lat <= north and west <= lon <= east
+
+
+def discover(fetch=None, city=CITY):
+    city = city_profile(city)
+    bbox = ",".join(map(str, city["bounds"]))
+    filters = []
+    for key, groups in PLACE_TYPES.items():
+        values = "|".join(value for group in groups.values() for value in group)
+        filters.append(f'nwr["name"]["{key}"~"^({values})$"];')
+    query = f'[out:json][timeout:30][bbox:{bbox}];({"".join(filters)});out center qt;'
     payload = urlencode({"data": query}).encode()
     if fetch:
         result = json.loads(fetch(OVERPASS, payload))
@@ -33,18 +72,24 @@ def discover(fetch=None):
         raise ValueError(result["remark"])
     for element in result["elements"]:
         tags = element.get("tags", {})
-        if tags.get("access") in {"private", "no"}:
+        name = tags.get("name:" + city["language"]) or tags.get("name")
+        if not name or tags.get("access") in {"private", "no"}:
             continue
         coords = element.get("center", element)
-        lat, lon = coords.get("lat"), coords.get("lon")
-        if lat is None or lon is None or not (54.54 <= lat <= 54.75 and 39.55 <= lon <= 39.92):
+        if not in_city(coords, city):
+            continue
+        category, hint = next(((group, tags[key]) for key, groups in PLACE_TYPES.items()
+                               for group, values in groups.items() if tags.get(key) in values), (None, None))
+        if not category:
             continue
         kind, osm_id = element["type"], element["id"]
-        yield dict(id=f"osm:{kind}:{osm_id}", name=tags["name"], lat=lat, lon=lon,
-                   address=", ".join(filter(None, (tags.get("addr:street"), tags.get("addr:housenumber")))),
-                   category_hint=tags.get("tourism") or tags.get("leisure") or tags.get("amenity"),
-                   hours=tags.get("opening_hours"), website=tags.get("website") or tags.get("contact:website"),
-                   wikidata=tags.get("wikidata"), commons=tags.get("wikimedia_commons"), tags=tags,
+        street = tags.get("addr:street") or tags.get("addr:place")
+        number = tags.get("addr:housenumber")
+        yield dict(id=f"osm:{kind}:{osm_id}", name=name, lat=coords["lat"], lon=coords["lon"],
+                   address=tags.get("addr:full") or (f"{street}, {number}" if street and number else None),
+                   category=category, category_hint=hint, hours=tags.get("opening_hours"),
+                   website=tags.get("website") or tags.get("contact:website"), wikidata=tags.get("wikidata"),
+                   commons=tags.get("wikimedia_commons"), tags=tags, city=city,
                    source=f"https://www.openstreetmap.org/{kind}/{osm_id}", collected_on=date.today().isoformat(),
                    verified=False)
 
@@ -65,7 +110,7 @@ def photo_allowed(photo):
                 and license_ok)
 
 
-def audit(places):
+def audit(places, city=CITY, allow_empty=False):
     ids = set()
     verified = []
     for p in places:
@@ -74,9 +119,8 @@ def audit(places):
         ids.add(p["id"])
         if not p.get("verified"):
             continue
-        if (type(p.get("lat")) not in (float,int) or type(p.get("lon")) not in (float,int)
-                or not (54.54 <= p["lat"] <= 54.75 and 39.55 <= p["lon"] <= 39.92)):
-            raise ValueError(f"Coordinates outside Ryazan: {p['id']}")
+        if not in_city(p, city):
+            raise ValueError(f"Coordinates outside {city['name']}: {p['id']}")
         if not all(p.get(key) for key in ("name", "category", "address", "verified_on")):
             raise ValueError(f"Missing verification fields: {p['id']}")
         date.fromisoformat(p["verified_on"])
@@ -97,7 +141,7 @@ def audit(places):
             if not photo_allowed(photo):
                 raise ValueError(f"Missing image attribution or supported license: {p['id']}")
         verified.append(p)
-    if not verified:
+    if not verified and not allow_empty:
         raise ValueError("No verified places")
     return verified
 
@@ -140,13 +184,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--online", action="store_true", help="check source and Commons URLs")
     parser.add_argument("--discover", type=Path, help="write new unapproved OSM leads to a separate file")
+    parser.add_argument("--catalog", type=Path, default=ROOT / "catalog.json")
+    parser.add_argument("--city-config", type=Path)
     args = parser.parse_args()
+    city = city_profile(json.loads(args.city_config.read_text(encoding="utf-8-sig"))) if args.city_config else CITY
     if args.discover:
         if args.discover.resolve() == (ROOT / "catalog.json").resolve():
             parser.error("choose a candidate file outside catalog.json")
-        args.discover.write_text(json.dumps(list(discover()), ensure_ascii=False, indent=2), encoding="utf-8")
+        args.discover.write_text(json.dumps(list(discover(city=city)), ensure_ascii=False, indent=2), encoding="utf-8")
     else:
-        selected = audit(json.loads((ROOT / "catalog.json").read_text(encoding="utf-8")))
+        selected = audit(json.loads(args.catalog.read_text(encoding="utf-8-sig")), city)
         if args.online:
             audit_online(selected)
         print(f"{len(selected)} verified places, {sum(len(p['gallery']) for p in selected)} attributed photos")

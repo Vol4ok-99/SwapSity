@@ -25,7 +25,7 @@ const token="__LOCAL_TOKEN__";
 const get=id=>document.getElementById(id);
 const record=get("record");
 let rows=[];
-const statuses={needs_review:"Нужна проверка",checking:"Ожидает обработки",stale:"Устарело",ready:"Нужна сверка фото"};
+const statuses={discovered:"В очереди на обработку",published:"Нужна сверка фото",needs_review:"Нужна проверка",checking:"Ожидает обработки",stale:"Устарело",ready:"Нужна сверка фото"};
 function node(tag,text,parent,attrs={}){
   const item=document.createElement(tag);item.textContent=text;Object.assign(item,attrs);parent.append(item);return item;
 }
@@ -58,11 +58,12 @@ async function openPlace(id){
   node("h2",place.name||id,record);
   node("p",`${place.category||"Категория уточняется"} · ${place.address||"Уточнить адрес"} · ${place.lat}, ${place.lon}`,record);
   const stateLabels={unknown:"неизвестно",matched:"сопоставлено",manual:"подтверждено редактором",
-    unconfirmed:"нужно подтверждение",present:"указан",area:"площадной объект",missing:"нет сведений",
+    unconfirmed:"нужно подтверждение",present:"указан",area:"площадной объект",coordinates:"точка на карте",missing:"нет сведений",
     review:"нужна сверка",approved:"подтверждено"};
   const fields={identity:"Идентичность",address:"Адрес",hours:"Режим работы",price:"Стоимость",photos:"Фотографии"};
   const chips=Object.entries(fields).map(([key,title])=>title+": "+(stateLabels[place.signals?.[key]]||"ожидает проверки"));
   node("p",chips.join(" · "),record);
+  if(place.signals?.photo_error)node("p",`Поиск фото отложен · ${place.signals.photo_error}`,record);
   for(const f of place.findings||[])node("p",f,record);
   const history=node("details","",record);
   node("summary","Журнал и сообщения API",history);
@@ -73,10 +74,12 @@ async function openPlace(id){
     link(node("p","",sources),url);
   }
   const maps=node("p","",record);
-  const query=encodeURIComponent(["Рязань",place.name,place.address].filter(Boolean).join(" "));
+  const query=encodeURIComponent([place.city?.name||"Рязань",place.name,place.address].filter(Boolean).join(" "));
   node("a","Сверить в Яндекс Картах",maps,{href:`https://yandex.ru/maps/?text=${query}`,target:"_blank",rel:"noopener"});
-  maps.append(" · ");
-  node("a","Сверить в 2ГИС",maps,{href:`https://2gis.ru/ryazan/search/${query}`,target:"_blank",rel:"noopener"});
+  if(!place.city || place.city.name==="Рязань"){
+    maps.append(" · ");
+    node("a","Сверить в 2ГИС",maps,{href:`https://2gis.ru/ryazan/search/${query}`,target:"_blank",rel:"noopener"});
+  }
   const diff=node("details","",record);
   node("summary","Сравнить исходные, опубликованные и новые сведения",diff);
   node("pre",JSON.stringify({published:value.initial,raw:value.raw,processed:place,evidence:value.facts},null,2),diff);
@@ -88,6 +91,10 @@ async function openPlace(id){
     picks.push([photo.source,node("input","",label,{type:"checkbox",checked:Boolean(photo.confirmed)})]);
     link(node("p","",line),photo.source);link(node("p","",line),photo.license);
   }
+  if(!value.data){
+    node("p","Запустите обработку кандидатов, чтобы здесь появились результаты сверки.",record);
+    return;
+  }
   const form=node("form","",record);
   const label=node("label","Поля карточки и источник (JSON)",form);
   const keys=["name","category","address","lat","lon","hours","price","description","website","source","coordinate_source"];
@@ -95,7 +102,7 @@ async function openPlace(id){
   const reason=node("input","",node("label","Причина решения ",form),{required:true,placeholder:"Что и по какому источнику сверено"});
   const target=node("input","",node("label","ID основной карточки для объединения ",form),{placeholder:"Например osm:way:123"});
   const tools=node("div","",form,{className:"tools"});
-  for(const [action,title] of [["approve","Подтвердить"],["correct","Исправить"],["reject","Отклонить"],["defer","Отложить"],["merge","Объединить дубли"]]){
+  for(const [action,title] of [...((value.state==="ready"||value.state==="published")&&picks.length ? [["approve_photos","Подтвердить только фото"]] : []),["approve","Подтвердить"],["correct","Исправить"],["reject","Отклонить"],["defer","Отложить"],["merge","Объединить дубли"]]){
     node("button",title,tools,{type:"submit",value:action});
   }
   form.onsubmit=async event=>{

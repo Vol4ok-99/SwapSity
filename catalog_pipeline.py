@@ -22,13 +22,13 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote, urlencode, unquote, urlsplit, urlunsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
-from verify_catalog import AGENT, ROOT, audit, discover, photo_allowed
+from verify_catalog import AGENT, CITY, ROOT, PLACE_TYPES, audit, city_profile, discover, in_city, photo_allowed
 
 STAGES = ("normalize", "duplicates", "enrich", "facts", "photos", "queue")
-CATEGORIES = {"museum":"culture","gallery":"culture","theatre":"culture","park":"nature",
-              "garden":"nature","viewpoint":"unusual","attraction":"unusual","cinema":"fun",
-              "cafe":"food","restaurant":"food","bar":"food","sports_centre":"active","circus":"fun"}
-AREAS = {"park", "garden", "viewpoint"}
+CATEGORIES = {feature: category for groups in PLACE_TYPES.values()
+              for category, features in groups.items() for feature in features}
+AREAS = {"park", "garden", "viewpoint", "nature_reserve", "beach"}
+LANDMARKS = {"monument", "memorial", "artwork", "ruins", "archaeological_site"}
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS places (
  id TEXT PRIMARY KEY, raw TEXT NOT NULL, fingerprint TEXT NOT NULL, data TEXT,
@@ -43,6 +43,7 @@ CREATE TABLE IF NOT EXISTS facts (
 CREATE TABLE IF NOT EXISTS events (place TEXT, state TEXT, reason TEXT, at TEXT);
 CREATE TABLE IF NOT EXISTS aliases (id TEXT PRIMARY KEY, canonical TEXT NOT NULL);
 CREATE TABLE IF NOT EXISTS cache (key TEXT PRIMARY KEY, body BLOB NOT NULL, expires INTEGER NOT NULL);
+CREATE TABLE IF NOT EXISTS photo_scans (place TEXT PRIMARY KEY, fingerprint TEXT NOT NULL, retry_at INTEGER NOT NULL);
 CREATE TABLE IF NOT EXISTS ai_suggestions (key TEXT PRIMARY KEY, cost INTEGER, result TEXT, at TEXT);
 """
 
@@ -78,11 +79,15 @@ def load_json(path):
     return json.loads(Path(path).read_text(encoding="utf-8-sig"))
 
 
-def import_rows(db, rows, existing=False):
+def import_rows(db, rows, existing=False, city=CITY):
     changed = 0
     with db:
         for raw in rows:
             pid = raw.get("id")
+            if raw.get("city") and city_profile(raw["city"]) != city:
+                raise ValueError(f"{pid}: запись из другого города")
+            if city != CITY:
+                raw = {**raw, "city": city}
             if not isinstance(pid,str) or not re.fullmatch(r"[\w:-]{1,120}", pid):
                 raise ValueError("Invalid place ID")
             fingerprint = hashlib.sha256(dump({k:v for k,v in raw.items() if k!="collected_on"}).encode()).hexdigest()
@@ -91,10 +96,14 @@ def import_rows(db, rows, existing=False):
                 continue
             if old and old["fingerprint"]==fingerprint:
                 continue
+            if old and (old["state"] == "published" or old["state"] == "ready" and old["decision"]):
+                db.execute("UPDATE places SET raw=?,fingerprint=? WHERE id=?",(dump(raw),fingerprint,pid))
+                changed+=1
+                continue
             state = "published" if existing and raw.get("verified") else "discovered"
             db.execute("""INSERT INTO places(id,raw,fingerprint,state,initial,updated) VALUES(?,?,?,?,?,?)
                           ON CONFLICT(id) DO UPDATE SET raw=excluded.raw,fingerprint=excluded.fingerprint,
-                          state='discovered',stage=0,retry_at=0,data=NULL,updated=excluded.updated""",
+                          state='discovered',stage=0,retry_at=0,data=NULL,decision=NULL,updated=excluded.updated""",
                        (pid,dump(raw),fingerprint,state,dump(raw) if existing else None,now()))
             if old:
                 db.execute("DELETE FROM facts WHERE place=? AND method!='manual'",(pid,))
@@ -111,10 +120,15 @@ def norm(value):
     return " ".join(re.findall(r"\w+",clean(value).casefold().replace("ё","е")))
 
 
-def address_key(value):
+def address_key(value,city=CITY):
     value=norm(value)
-    aliases={"улица":"ул","дом":"д","проспект":"пр","площадь":"пл","переулок":"пер"}
-    return " ".join(aliases.get(word,word) for word in value.split() if word not in {"г","город","рязань","д","ул","улица"})
+    city_name=norm(city["name"])
+    for prefix in ("город "+city_name+" ","г "+city_name+" ",city_name+" "):
+        if value.startswith(prefix):
+            value=value.removeprefix(prefix)
+            break
+    aliases={"проспект":"пр","площадь":"пл","переулок":"пер"}
+    return " ".join(aliases.get(word,word) for word in value.split() if word not in {"д","дом","ул","улица"})
 
 
 def phone(value):
@@ -135,19 +149,20 @@ def website(value):
 
 
 def valid_point(p):
-    lat,lon=p.get("lat"),p.get("lon")
-    return (type(lat) in (int,float) and type(lon) in (int,float)
-            and 54.54<=lat<=54.75 and 39.55<=lon<=39.92)
+    return in_city(p, p.get("city") or CITY)
 
 
 def distance(a,b):
-    return math.hypot((a["lat"]-b["lat"])*111200,(a["lon"]-b["lon"])*64300)
+    latitude = math.radians((a["lat"] + b["lat"]) / 2)
+    return math.hypot((a["lat"]-b["lat"])*111200, (a["lon"]-b["lon"])*111200*math.cos(latitude))
 
 
 def duplicate(a,b):
-    if not valid_point(a) or not valid_point(b):
+    if (a.get("city") or CITY) != (b.get("city") or CITY) or not valid_point(a) or not valid_point(b):
         return False
-    same_address=address_key(a.get("address")) and address_key(a.get("address"))==address_key(b.get("address"))
+    city=a.get("city") or CITY
+    address=address_key(a.get("address"),city)
+    same_address=address and address==address_key(b.get("address"),city)
     close=distance(a,b)<90
     same_q=a.get("wikidata") and a.get("wikidata")==b.get("wikidata")
     same_phone=a.get("phone") and a.get("phone")==b.get("phone")
@@ -159,6 +174,13 @@ class RetryLater(Exception):
     def __init__(self, message, seconds=900):
         super().__init__(message)
         self.seconds=seconds
+
+
+def map_directory(url):
+    parts=urlsplit(url)
+    host=parts.hostname or ""
+    return (host in {"2gis.ru","2gis.com","yandex.ru","yandex.com","yandex.com.tr"}
+            or host.endswith((".2gis.ru",".2gis.com",".yandex.ru",".yandex.com",".yandex.com.tr")))
 
 
 def public_url(url):
@@ -175,6 +197,8 @@ def public_url(url):
 class PublicRedirect(HTTPRedirectHandler):
     max_redirections=3
     def redirect_request(self, req, fp, code, msg, headers, newurl):
+        if map_directory(newurl):
+            raise ValueError("Картографический справочник доступен для ручной сверки")
         public_url(newurl)
         return super().redirect_request(req,fp,code,msg,headers,newurl)
 
@@ -184,6 +208,7 @@ class Http:
         self.db,self.enabled=db,enabled
         self.opener=opener or build_opener(PublicRedirect()).open
         self.last=0
+        self.retry_until={}
 
     def get(self,url,data=None,method=None):
         key=hashlib.sha256((method or "").encode()+b"\0"+url.encode()+b"\0"+(data or b"")).hexdigest()
@@ -192,6 +217,10 @@ class Http:
             return cached["body"]
         if not self.enabled:
             raise RetryLater("Network disabled")
+        host=urlsplit(url).hostname
+        remaining=math.ceil(self.retry_until.get(host,0)-time.monotonic())
+        if remaining>0:
+            raise RetryLater("Source temporarily paused",max(900,remaining))
         public_url(url)
         for attempt in range(3):
             time.sleep(max(0, .65-(time.monotonic()-self.last)))
@@ -212,12 +241,14 @@ class Http:
                 except (TypeError,ValueError):
                     delay=0
                 if delay>12:
+                    self.retry_until[host]=time.monotonic()+delay
                     raise RetryLater(f"Rate limit: retry after {int(delay)}s", max(900, math.ceil(delay))) from exc
                 if attempt<2:
                     time.sleep(max(2**attempt,delay))
             except (OSError,URLError):
                 if attempt<2:
                     time.sleep(2**attempt)
+        self.retry_until[host]=time.monotonic()+60
         raise RetryLater("Source temporarily unavailable")
 
     def json(self,url,**params):
@@ -293,11 +324,12 @@ def normalize(db,row,p,http):
     tags=raw.get("tags",{})
     hint=raw.get("category_hint")
     point={k:raw.get(k) for k in ("lat","lon")}
-    p.update(id=row["id"],name=clean(raw.get("name")),category=raw.get("category") or CATEGORIES.get(hint),
+    p.update(id=row["id"],city=raw.get("city") or CITY,name=clean(raw.get("name")),category=raw.get("category") or CATEGORIES.get(hint),
              address=clean(raw.get("address")) or None,**point,hours=None,price=None,description=None,
              website=website(raw.get("website")),phone=phone(raw.get("phone") or tags.get("phone")),
              wikidata=raw.get("wikidata"),coordinate_source=raw.get("coordinate_source") or raw.get("source"),
-             source=raw.get("source"),areal=hint in AREAS,findings=[],gallery=[],signals={},pending=[])
+             source=raw.get("source"),areal=hint in AREAS,landmark=hint in LANDMARKS and tags.get("indoor")!="yes",
+             findings=[],gallery=[],signals={},pending=[])
     source=p["coordinate_source"]
     for field in ("name","category","address","lat","lon","website","phone"):
         evidence(db,row["id"],field,p.get(field),source,"osm","import")
@@ -313,12 +345,13 @@ def find_duplicates(db,row,p,http):
             p["findings"].append("Возможный дубль: "+item["id"])
 
 
-def enrich(db,row,p,http):
-    q=p.get("wikidata")
+def wikidata_fields(db,row,p,http):
+    language=(p.get("city") or CITY)["language"]
+    q=p.get("wikidata") or json.loads(row["raw"]).get("wikidata")
     if isinstance(q,str) and re.fullmatch(r"Q[1-9][0-9]*",q):
         url="https://www.wikidata.org/wiki/"+q
         entity=http.json("https://www.wikidata.org/w/api.php",action="wbgetentities",ids=q,
-                         props="claims|labels",languages="ru",format="json")["entities"][q]
+                         props="claims|labels|sitelinks",languages=language,sitefilter=language+"wiki",format="json")["entities"][q]
         claims=entity.get("claims",{})
         for prop,field in (("P18","file"),("P373","commons_category"),("P856","wikidata_website"),("P625","wikidata_point")):
             for claim in claims.get(prop,[]):
@@ -329,49 +362,73 @@ def enrich(db,row,p,http):
                     p[field]=value
                     evidence(db,row["id"],field,value,url,"wikidata","claim (independence unknown)")
                     break
-        wd_label=entity.get("labels",{}).get("ru",{}).get("value")
+        wd_label=entity.get("labels",{}).get(language,{}).get("value")
+        p["wiki_title"]=entity.get("sitelinks",{}).get(language+"wiki",{}).get("title")
         if wd_label and SequenceMatcher(None,norm(wd_label),norm(p["name"])).ratio()<.55:
             p["findings"].append("Название в Wikidata отличается: "+wd_label)
+
+
+def enrich(db,row,p,http):
+    city=p.get("city") or CITY
+    wikidata_fields(db,row,p,http)
     url=p.get("website") or website(p.get("wikidata_website"))
-    if not url:
+    if not url or map_directory(url):
         return
     p["website"]=url
     candidates=list(official_candidates(http.get(url)))
     matching=[(name,addr,city,geo) for name,addr,city,geo in candidates
               if SequenceMatcher(None,norm(name),norm(p["name"])).ratio()>=.78]
-    for name,addr,city,geo in matching:
-        evidence(db,row["id"],"address",addr,url,urlsplit(url).hostname,"JSON-LD")
-        evidence(db,row["id"],"name",name,url,urlsplit(url).hostname,"JSON-LD")
-        if city and "рязань" not in norm(city):
-            p["findings"].append("Город филиала на сайте отличается: "+city)
-        elif p.get("address") and address_key(p["address"])!=address_key(addr):
-            p["findings"].append("Адрес на сайте отличается: "+addr)
-        elif city and p.get("address") and re.search(r"\d",addr) and norm(name)==norm(p["name"]):
-            host=urlsplit(url).hostname
-            if not any(host==d or host.endswith("."+d) for d in ("openstreetmap.org","wikidata.org","wikipedia.org","wikimedia.org","wikivoyage.org")):
-                p["signals"]["official_address"]=url
+    host=urlsplit(url).hostname
+    independent=not any(host==d or host.endswith("."+d) for d in (
+        "openstreetmap.org","wikidata.org","wikipedia.org","wikimedia.org","wikivoyage.org"))
+    city_name=norm(city["name"])
+    addresses={}
+    conflicts=[]
+    for name,addr,locality,geo in matching:
+        evidence(db,row["id"],"address",addr,url,host,"JSON-LD")
+        evidence(db,row["id"],"name",name,url,host,"JSON-LD")
+        local=norm(locality) in {city_name,"г "+city_name,"город "+city_name}
+        nearby=False
         if isinstance(geo,dict):
             try:
                 point={"lat":float(geo["latitude"]),"lon":float(geo["longitude"])}
             except (KeyError,ValueError,TypeError):
-                continue
-            evidence(db,row["id"],"coordinates",point,url,urlsplit(url).hostname,"JSON-LD")
-            if valid_point(p) and distance(p,point)>150:
-                p["findings"].append("Координаты на сайте и в OSM не совпадают")
-    if not matching:
+                pass
+            else:
+                evidence(db,row["id"],"coordinates",point,url,host,"JSON-LD")
+                nearby=valid_point(p) and in_city(point,city) and distance(p,point)<=100
+                if valid_point(p) and distance(p,point)>150:
+                    conflicts.append("Координаты на сайте и в OSM не совпадают")
+                    continue
+        if locality and not local:
+            conflicts.append("Город филиала на сайте отличается: "+locality)
+            continue
+        if p.get("address") and address_key(p["address"],city)!=address_key(addr,city):
+            conflicts.append("Адрес на сайте отличается: "+addr)
+            continue
+        if independent and norm(name)==norm(p["name"]) and re.search(r"\d",addr) and (local or nearby):
+            if p.get("address") or nearby:
+                addresses[address_key(addr,city)]=addr
+    if len(addresses)==1:
+        p["address"]=p.get("address") or next(iter(addresses.values()))
+        p["signals"]["official_address"]=url
+    elif conflicts or len(addresses)>1:
+        p["findings"].extend(dict.fromkeys(conflicts or ["Сайт указал несколько возможных адресов"]))
+    else:
         p["findings"].append("Сайт не подтвердил название и адрес конкретного филиала в структурированных данных")
 
 
 def facts(db,row,p,http):
     if not valid_point(p):
-        p["findings"].append("Координаты отсутствуют или вне области Рязани")
+        p["findings"].append(f"Координаты отсутствуют или вне границ {(p.get('city') or CITY)['name']}")
     wd=p.get("wikidata_point") or {}
     other={"lat":wd.get("latitude"),"lon":wd.get("longitude")}
     if valid_point(p) and all(type(v) in (int,float) for v in other.values()) and distance(p,other)>200:
         p["findings"].append("Координаты OSM и Wikidata расходятся более чем на 200 м")
     if not p.get("name") or p.get("category") not in CATEGORIES.values():
         p["findings"].append("Не определено название или категория")
-    p["signals"]["address"]="area" if p.get("areal") else "present" if p.get("address") else "missing"
+    p["signals"]["address"]=("area" if p.get("areal") else "present" if p.get("address") else
+                              "coordinates" if p.get("landmark") else "missing")
     p["signals"].update(hours="unknown",price="unknown",identity="unconfirmed")
     if p["signals"]["address"]=="missing":
         p["findings"].append("Нет адреса для точечного объекта")
@@ -379,39 +436,156 @@ def facts(db,row,p,http):
         p["findings"].append("Нужно независимое подтверждение идентичности и адреса")
 
 
-def media(db,row,p,http):
-    raw=json.loads(row["raw"])
-    link=raw.get("commons") or raw.get("tags",{}).get("wikimedia_commons") or ""
-    if link.startswith("https://commons.wikimedia.org/wiki/"):
-        link=unquote(link.split("/wiki/",1)[1]).replace("_"," ")
-    title = link if link.startswith("File:") else "File:"+p["file"] if isinstance(p.get("file"),str) else None
-    category=link if link.startswith("Category:") else "Category:"+p["commons_category"] if isinstance(p.get("commons_category"),str) else None
-    params=dict(action="query",prop="imageinfo",iiprop="url|extmetadata",iiurlwidth=960,format="json")
+COMMONS_API = "https://commons.wikimedia.org/w/api.php"
+
+
+def commons_title(value):
+    if not isinstance(value,str):
+        return ""
+    parts=urlsplit(value)
+    if parts.scheme:
+        if parts.hostname!="commons.wikimedia.org" or not parts.path.startswith("/wiki/"):
+            return ""
+        value=unquote(parts.path.removeprefix("/wiki/"))
+    return value.replace("_"," ").strip()
+
+
+def photo_queries(raw,p):
+    tags=raw.get("tags",{})
+    refs=[commons_title(raw.get("commons")),commons_title(tags.get("wikimedia_commons")),
+          commons_title(tags.get("image"))]
+    files=list(dict.fromkeys(ref for ref in refs if ref.startswith("File:")))
+    if p.get("file"):
+        files.append("File:"+p["file"])
+    if files:
+        yield "linked_file", {"titles":"|".join(dict.fromkeys(files))}
+    categories=list(dict.fromkeys(ref for ref in refs if ref.startswith("Category:")))
+    if p.get("commons_category"):
+        categories.append("Category:"+p["commons_category"])
+    for category in dict.fromkeys(categories):
+        yield "linked_category", dict(generator="categorymembers",gcmtitle=category,gcmtype="file",gcmlimit=12)
+    city=p.get("city") or CITY
+    language=city["language"]
+    wiki=tags.get("wikipedia") or ""
+    wiki_language, sep, wiki_title=wiki.partition(":")
+    title=p.get("wiki_title") or (wiki_title if sep and wiki_language==language else None)
     if title:
-        params["titles"]=title
-    elif category:
-        params.update(generator="categorymembers",gcmtitle=category,gcmtype="file",gcmlimit=5)
-    else:
-        p["signals"]["photos"]="missing"
-        return
-    result=http.json("https://commons.wikimedia.org/w/api.php",**params)
-    proposals=[]
-    for page in result.get("query",{}).get("pages",{}).values():
-        info=(page.get("imageinfo") or [{}])[0]
-        meta=info.get("extmetadata",{})
-        get=lambda key: plain(meta.get(key,{}).get("value",""))
-        photo=dict(source=info.get("descriptionurl"),url=info.get("thumburl"),author=get("Artist"),
-                   license=get("LicenseUrl").replace("http://","https://"),license_label=get("LicenseShortName"),
-                   attribution=get("Attribution"),method="linked_file" if title else "linked_category",
-                   checked_on=now())
-        if photo_allowed(photo) and http.get(photo["url"],method="HEAD").startswith(b"image/"):
-            photo["confirmed"]=False
-            proposals.append(photo)
-            evidence(db,row["id"],"photo",photo,photo["source"],"commons",photo["method"])
-        else:
-            evidence(db,row["id"],"rejected_photo",page["title"],"https://commons.wikimedia.org/","commons","unsupported license or metadata")
-    p["gallery"]=proposals
-    p["signals"]["photos"]="review" if proposals else "missing"
+        yield "linked_article", {"article":title,"language":language}
+    q=raw.get("wikidata")
+    if isinstance(q,str) and re.fullmatch(r"Q[1-9][0-9]*",q):
+        yield "depicts", dict(generator="search",gsrnamespace=6,gsrlimit=8,gsrsearch=f"haswbstatement:P180={q} filetype:bitmap")
+    name=re.sub(r'[^\w -]+',' ',p["name"]).strip()
+    city_name=re.sub(r'[^\w -]+',' ',city["name"]).strip()
+    if len(name)>=3 and city_name:
+        yield "name_search", dict(generator="search",gsrnamespace=6,gsrlimit=8,
+                                 gsrsearch=f'"{name}" "{city_name}" filetype:bitmap')
+
+
+def media(db,row,p,http,methods=None):
+    raw=json.loads(row["raw"])
+    proposals={photo["source"]:photo for photo in p["gallery"] if photo.get("confirmed")}
+    params=dict(action="query",prop="imageinfo",iiprop="url|mime|extmetadata",iiurlwidth=960,
+                iiextmetadatafilter="Artist|Attribution|LicenseUrl|LicenseShortName|Restrictions",format="json",redirects=1)
+    article_error=None
+    try:
+        for method, query in photo_queries(raw,p):
+            if methods is not None and method not in methods:
+                continue
+            if method=="linked_article":
+                try:
+                    article=http.json(f"https://{query['language']}.wikipedia.org/w/api.php",action="query",
+                                      prop="pageimages",titles=query["article"],piprop="name",pilicense="free",
+                                      redirects=1,format="json")
+                except RetryLater as exc:
+                    article_error=exc
+                    continue
+                files=[page["pageimage"] for page in article.get("query",{}).get("pages",{}).values() if page.get("pageimage")]
+                if not files:
+                    continue
+                query={"titles":"|".join(f"File:{name}" for name in files)}
+            result=http.json(COMMONS_API,**params,**query)
+            for page in result.get("query",{}).get("pages",{}).values():
+                if len(proposals)>=6:
+                    break
+                info=(page.get("imageinfo") or [{}])[0]
+                if info.get("descriptionurl") in proposals:
+                    continue
+                meta=info.get("extmetadata",{})
+                def get(key):
+                    return plain(meta.get(key,{}).get("value",""))
+                photo=dict(source=info.get("descriptionurl"),url=info.get("thumburl"),author=get("Artist"),
+                           license=get("LicenseUrl").replace("http://","https://"),license_label=get("LicenseShortName"),
+                           attribution=get("Attribution"),method=method,checked_on=now(),confirmed=False)
+                if info.get("mime") in {"image/jpeg","image/png","image/webp"} and photo_allowed(photo) and not get("Restrictions"):
+                    proposals[photo["source"]]=photo
+                    evidence(db,row["id"],"photo",photo,photo["source"],"commons",method)
+                else:
+                    evidence(db,row["id"],"rejected_photo",page.get("title"),"https://commons.wikimedia.org/","commons",method)
+            if len(proposals)>=3:
+                break
+        if article_error and len(proposals)<3:
+            raise article_error
+    finally:
+        p["gallery"]=list(proposals.values())
+        p["signals"]["photos"]=("review" if any(not x.get("confirmed") for x in proposals.values()) else
+                                 "approved" if proposals else "missing")
+
+
+def photo_stage(db,row,p,http,refresh_wikidata=False):
+    retry_at=0
+    try:
+        source_error=None
+        if refresh_wikidata:
+            try:
+                # Copy only media leads into approved cards; leave their findings untouched.
+                lookup={**p,"findings":[]}
+                wikidata_fields(db,row,lookup,http)
+                p.update({key:lookup[key] for key in ("file","commons_category","wiki_title") if key in lookup})
+            except (RetryLater,ValueError,KeyError,OSError) as exc:
+                source_error=exc
+        media(db,row,p,http)
+        if source_error and not p["gallery"]:
+            raise source_error
+        p["signals"].pop("photo_error",None)
+    except (RetryLater,ValueError,OSError) as exc:
+        retry_at=int(time.time())+getattr(exc,"seconds",900)
+        p["signals"]["photo_error"]=str(exc)
+    db.execute("INSERT OR REPLACE INTO photo_scans VALUES(?,?,?)",(row["id"],row["fingerprint"],retry_at))
+    return retry_at
+
+
+def scan_photos(db,limit):
+    http=Http(db)
+    totals={"processed":0,"with_suggestions":0,"retry":0}
+    with db:
+        for row in db.execute("SELECT * FROM places WHERE state='published' AND data IS NULL"):
+            public=json.loads(row["initial"])
+            if public.get("gallery"):
+                continue
+            data={**public,"city":json.loads(row["raw"]).get("city") or CITY,
+                  "areal":bool(public.get("route_to_coordinates")),"findings":[],"gallery":[],
+                  "signals":{"identity":"matched","photos":"missing"}}
+            db.execute("UPDATE places SET data=? WHERE id=?",(dump(data),row["id"]))
+    rows=db.execute("""SELECT p.* FROM places p LEFT JOIN photo_scans s ON s.place=p.id
+        WHERE p.data IS NOT NULL AND p.state IN ('needs_review','ready','published','checking')
+          AND COALESCE(json_extract(p.data,'$.signals.photos'),'') != 'approved'
+          AND (s.place IS NULL OR s.fingerprint != p.fingerprint OR (s.retry_at > 0 AND s.retry_at <= ?))
+        ORDER BY CASE WHEN p.state IN ('ready','published') THEN 0 ELSE 1 END,
+                 CASE WHEN json_extract(p.raw,'$.commons') IS NOT NULL OR json_extract(p.raw,'$.wikidata') IS NOT NULL
+                     OR json_extract(p.raw,'$.tags.wikipedia') IS NOT NULL THEN 0 ELSE 1 END,p.id LIMIT ?""",
+        (int(time.time()),limit)).fetchall()
+    for row in rows:
+        with db:
+            db.execute("BEGIN IMMEDIATE")
+            current=db.execute("SELECT * FROM places WHERE id=?",(row["id"],)).fetchone()
+            if current!=row:
+                continue
+            p=json.loads(row["data"])
+            totals["retry"]+=bool(photo_stage(db,row,p,http,refresh_wikidata=True))
+            db.execute("UPDATE places SET data=?,updated=? WHERE id=?",(dump(p),now(),row["id"]))
+            totals["processed"]+=1
+            totals["with_suggestions"]+=p["signals"]["photos"]=="review"
+    return totals
 
 
 def queue(db,row,p,http):
@@ -423,7 +597,7 @@ def queue(db,row,p,http):
     return "needs_review", "; ".join(p["findings"] or ["Проверить источники и идентичность"])
 
 
-PROCESSORS=(normalize,find_duplicates,enrich,facts,media,queue)
+PROCESSORS=(normalize,find_duplicates,enrich,facts,photo_stage,queue)
 
 
 def process(db, limit=20, enabled=True, stage=None, ids=()):
@@ -436,7 +610,10 @@ def process(db, limit=20, enabled=True, stage=None, ids=()):
     if ids:
         sql+=" AND id IN ("+",".join("?" for _ in ids)+")"
         args.extend(ids)
-    rows=db.execute(sql+" ORDER BY stage,id LIMIT ?",(*args,limit)).fetchall()
+    rows=db.execute(sql+""" ORDER BY stage DESC, CASE WHEN
+        COALESCE(json_extract(raw,'$.commons'), json_extract(raw,'$.wikidata'),
+                 json_extract(raw,'$.tags.wikipedia'), json_extract(raw,'$.tags.image')) IS NOT NULL THEN 0
+        WHEN json_extract(raw,'$.website') IS NOT NULL THEN 1 ELSE 2 END,id LIMIT ?""",(*args,limit)).fetchall()
     processed=0
     for row in rows:
         with db:
@@ -456,11 +633,11 @@ def process(db, limit=20, enabled=True, stage=None, ids=()):
                 try:
                     reason=STAGES[index]
                     result=PROCESSORS[index](db,row,data,http)
-                    if result:
+                    if index==STAGES.index("queue"):
                         state,reason=result
                     index+=1
                 except (RetryLater,ValueError,KeyError,OSError) as exc:
-                    if index not in (2,4):
+                    if index!=2:
                         raise
                     reason=f"{STAGES[index]}: {exc}"
                     db.execute("UPDATE places SET data=?,stage=?,retry_at=? WHERE id=?",
@@ -482,12 +659,26 @@ def review(db,pid,action,change):
     if not reason:
         raise ValueError("A review reason is required")
     with db:
-        if action in {"approve","correct"}:
+        if action=="approve_photos":
+            if row["state"] not in ("published","ready"):
+                raise ValueError("Сначала подтвердите само место")
+            selected=set(change.get("photos",[]))
+            photos=[photo for photo in p["gallery"] if photo["source"] in selected and photo_allowed(photo)]
+            if not 1<=len(photos)<=3:
+                raise ValueError("Отметьте от одной до трёх фотографий")
+            p["gallery"]=[{**photo,"confirmed":True,"checked_on":now()} for photo in photos]
+            for photo in p["gallery"]:
+                evidence(db,pid,"photo",photo,photo["source"],"rightsholder" if photo["license"]=="permission" else "commons","manual")
+            p["signals"]["photos"]="approved"
+            p["photos_only"]=bool(row["state"]=="published" or p.get("photos_only"))
+            state="ready"
+        elif action in {"approve","correct"}:
+            p.pop("photos_only",None)
             for key in ("name","category","address","lat","lon","hours","price","description","website","source","coordinate_source"):
                 if key in change:
                     p[key]=change[key]
             if (not valid_point(p) or not clean(p.get("name")) or p.get("category") not in CATEGORIES.values()
-                or not (p.get("areal") or p.get("address")) or not website(p.get("source"))
+                or not (p.get("areal") or p.get("address") or p.get("landmark")) or not website(p.get("source"))
                 or not website(p.get("coordinate_source"))
                 or (action=="approve" and urlsplit(p["source"]).hostname==urlsplit(p["coordinate_source"]).hostname)):
                 raise ValueError("Confirm the identity, category, coordinate source and address or area")
@@ -515,7 +706,7 @@ def review(db,pid,action,change):
                     photo["method"]="manual"
                     photo["checked_on"]=now()
             p["gallery"]=[x for x in p["gallery"] if x["method"]!="manual_permission"]+manual_photos
-            p["signals"].update(identity="manual",address="area" if p["areal"] else "present",
+            p["signals"].update(identity="manual",address="area" if p["areal"] else "present" if p.get("address") else "coordinates",
                                 hours="manual" if p.get("hours") else "unknown",
                                 price="manual" if p.get("price") is not None else "unknown")
             if action=="approve":
@@ -555,9 +746,9 @@ def atomic(path,value):
             tmp.unlink()
 
 
-def export(db,path,apply=False):
-    base=load_json(path)
-    audit(base)
+def export(db,path,apply=False,city=CITY):
+    base=load_json(path) if path.exists() else []
+    audit(base,city,allow_empty=True)
     output={p["id"]:p for p in base}
     changed=[]
     for row in db.execute("SELECT * FROM places WHERE state='ready'"):
@@ -565,9 +756,14 @@ def export(db,path,apply=False):
         gallery=[x for x in p["gallery"] if x.get("confirmed") and photo_allowed(x)][:3]
         public={key:p.get(key) for key in ("id","name","category","address","lat","lon","hours","price",
                                           "website","description","source","coordinate_source")}
-        public.update(address=public["address"] or ("Рязань, общественная территория" if p["areal"] else None),
-                      route_to_coordinates=p["areal"],verified=True,verified_on=date.today().isoformat(),
+        fallback_address = (f"{city['name']}, общественная территория" if p["areal"] else
+                            f"{city['name']}, точка на карте" if p.get("landmark") else None)
+        public.update(address=public["address"] or fallback_address,
+                      route_to_coordinates=p["areal"] or not public["address"],verified=True,verified_on=date.today().isoformat(),
                       gallery=gallery,photo=gallery[0] if gallery else None)
+        if p.get("photos_only"):
+            current=output.get(row["id"]) or json.loads(row["initial"])
+            public={**current,"gallery":gallery,"photo":gallery[0] if gallery else None}
         output[row["id"]]=public
         changed.append(row["id"])
     withdrawn=[]
@@ -583,7 +779,7 @@ def export(db,path,apply=False):
             output[row["id"]]={**output[row["id"]],"verified":False,"canonical_id":row["canonical"]}
         merged.append(dict(row))
     result=list(output.values())
-    verified=audit(result)
+    verified=audit(result,city,allow_empty=not apply)
     report={"existing":len(base),"total":len(result),"verified":len(verified),"changes":changed,"withdrawn":withdrawn,"aliases":merged}
     staging=path.with_name(path.stem+".staging.json")
     atomic(staging,result)
@@ -601,15 +797,22 @@ def export(db,path,apply=False):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--db",type=Path,default=ROOT/"catalog-work.sqlite3")
-    parser.add_argument("--catalog",type=Path,default=ROOT/"catalog.json")
+    parser.add_argument("--catalog",type=Path)
+    parser.add_argument("--city-config",type=Path)
     commands=parser.add_subparsers(dest="command",required=True)
     imp=commands.add_parser("import")
     imp.add_argument("--file",type=Path)
     job=commands.add_parser("process")
-    job.add_argument("--limit",type=int,default=20)
+    job_size=job.add_mutually_exclusive_group()
+    job_size.add_argument("--limit",type=int,default=20)
+    job_size.add_argument("--all",action="store_true")
     job.add_argument("--stage",choices=STAGES)
     job.add_argument("--offline",action="store_true")
     job.add_argument("--id",action="append",default=[])
+    photos=commands.add_parser("photos")
+    photo_size=photos.add_mutually_exclusive_group()
+    photo_size.add_argument("--limit",type=int,default=20)
+    photo_size.add_argument("--all",action="store_true")
     stale=commands.add_parser("stale")
     stale.add_argument("--days",type=int,default=90)
     ui=commands.add_parser("review")
@@ -617,6 +820,9 @@ def main():
     ex=commands.add_parser("export")
     ex.add_argument("--apply",action="store_true")
     commands.add_parser("stats")
+    auto=commands.add_parser("auto-publish")
+    auto.add_argument("--file",type=Path)
+    auto.add_argument("--offline",action="store_true")
     ai=commands.add_parser("suggest")
     ai.add_argument("--id",required=True)
     ai.add_argument("--fragment",type=Path,required=True)
@@ -625,14 +831,43 @@ def main():
     ai.add_argument("--budget-micros",type=int,required=True)
     ai.add_argument("--reserve-micros",type=int,required=True)
     args=parser.parse_args()
+    try:
+        city = city_profile(load_json(args.city_config)) if args.city_config else CITY
+    except (ValueError,OSError) as exc:
+        parser.error(str(exc))
+    if city != CITY and (not args.catalog or args.db == ROOT/"catalog-work.sqlite3"
+                         or args.catalog.resolve() == (ROOT/"catalog.json").resolve()):
+        parser.error("Для нового города укажите отдельные --db и --catalog")
+    args.catalog = args.catalog or ROOT/"catalog.json"
     with closing(connect(args.db)) as db:
-        import_rows(db,load_json(args.catalog),existing=True)
+        db.execute("CREATE TABLE IF NOT EXISTS city_config (id INTEGER PRIMARY KEY, profile TEXT NOT NULL)")
+        with db:
+            stored = db.execute("SELECT profile FROM city_config WHERE id=1").fetchone()
+            if stored and json.loads(stored["profile"]) != city:
+                parser.error("У этой базы уже есть настройки другого города")
+            if not stored and city != CITY and db.execute("SELECT 1 FROM places LIMIT 1").fetchone():
+                parser.error("Для нового города нужна отдельная база")
+            db.execute("INSERT OR IGNORE INTO city_config VALUES (1,?)", (dump(city),))
+        if args.catalog.exists():
+            base = load_json(args.catalog)
+            audit(base,city,allow_empty=True)
+            import_rows(db,base,existing=True,city=city)
         if args.command=="import":
             with db:
-                rows=load_json(args.file) if args.file else list(discover(Http(db).get))
-                print(dump({"changed":import_rows(db,rows),"input":len(rows)}))
+                rows=load_json(args.file) if args.file else list(discover(Http(db).get,city))
+                print(dump({"changed":import_rows(db,rows,city=city),"input":len(rows)}))
+        elif args.command=="auto-publish":
+            from catalog_auto import automatic_publish
+            if args.offline and not args.file:
+                parser.error("--offline requires --file")
+            with db:
+                rows=load_json(args.file) if args.file else list(discover(Http(db).get,city))
+            report=automatic_publish(db,args.catalog,rows,city,not args.offline)
+            print(dump({**report,"skipped":len(report["skipped"])}))
         elif args.command=="process":
-            print(dump({"processed":process(db,max(1,min(args.limit,250)),not args.offline,args.stage,args.id)}))
+            print(dump({"processed":process(db,-1 if args.all else max(1,min(args.limit,250)),not args.offline,args.stage,args.id)}))
+        elif args.command=="photos":
+            print(dump(scan_photos(db,-1 if args.all else max(1,min(args.limit,250)))))
         elif args.command=="stale":
             with db:
                 rows=db.execute("""SELECT id FROM places WHERE state='published'
@@ -643,7 +878,7 @@ def main():
                     transition(db,row["id"],"stale","Scheduled recheck")
                 print(dump({"scheduled":len(rows)}))
         elif args.command=="export":
-            print(dump(export(db,args.catalog,args.apply)))
+            print(dump(export(db,args.catalog,args.apply,city)))
         elif args.command=="suggest":
             from catalog_ai import suggest
             print(dump(suggest(db,args)))
