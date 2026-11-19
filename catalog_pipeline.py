@@ -484,7 +484,7 @@ def photo_queries(raw,p):
 def media(db,row,p,http,methods=None):
     raw=json.loads(row["raw"])
     proposals={photo["source"]:photo for photo in p["gallery"] if photo.get("confirmed")}
-    params=dict(action="query",prop="imageinfo",iiprop="url|mime|extmetadata",iiurlwidth=960,
+    params=dict(action="query",prop="imageinfo",iiprop="url|mime|thumbmime|extmetadata",iiurlwidth=960,
                 iiextmetadatafilter="Artist|Attribution|LicenseUrl|LicenseShortName|Restrictions",format="json",redirects=1)
     article_error=None
     try:
@@ -516,7 +516,8 @@ def media(db,row,p,http,methods=None):
                 photo=dict(source=info.get("descriptionurl"),url=info.get("thumburl"),author=get("Artist"),
                            license=get("LicenseUrl").replace("http://","https://"),license_label=get("LicenseShortName"),
                            attribution=get("Attribution"),method=method,checked_on=now(),confirmed=False)
-                if info.get("mime") in {"image/jpeg","image/png","image/webp"} and photo_allowed(photo) and not get("Restrictions"):
+                display_mime=info.get("thumbmime") or info.get("mime")
+                if display_mime in {"image/jpeg","image/png","image/webp"} and photo_allowed(photo) and not get("Restrictions"):
                     proposals[photo["source"]]=photo
                     evidence(db,row["id"],"photo",photo,photo["source"],"commons",method)
                 else:

@@ -2859,8 +2859,28 @@
     "route_to_coordinates": false,
     "verified": true,
     "verified_on": "2026-11-18",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Lenin_Street_35_2024-05_1715356462.tif",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Ryazan_Lenin_Street_35_2024-05_1715356462.tif/lossy-page1-960px-Ryazan_Lenin_Street_35_2024-05_1715356462.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Artyom Svetlov",
+        "license": "https://creativecommons.org/licenses/by/4.0",
+        "license_label": "CC BY 4.0",
+        "confirmed": true,
+        "method": "manual",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Lenin_Street_35_2024-05_1715356462.tif",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Ryazan_Lenin_Street_35_2024-05_1715356462.tif/lossy-page1-960px-Ryazan_Lenin_Street_35_2024-05_1715356462.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Artyom Svetlov",
+      "license": "https://creativecommons.org/licenses/by/4.0",
+      "license_label": "CC BY 4.0",
+      "confirmed": true,
+      "method": "manual",
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:node:1314948707",
@@ -5270,8 +5290,28 @@
     "verified": true,
     "verified_on": "2026-11-19",
     "osm_license": "https://opendatacommons.org/licenses/odbl/1-0/",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Lenina42d24_019_7465.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Ryazan_Lenina42d24_019_7465.jpg/960px-Ryazan_Lenina42d24_019_7465.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Ludvig14",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "confirmed": true,
+        "method": "manual",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Lenina42d24_019_7465.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Ryazan_Lenina42d24_019_7465.jpg/960px-Ryazan_Lenina42d24_019_7465.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Ludvig14",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "confirmed": true,
+      "method": "manual",
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:node:5075442411",
@@ -5762,8 +5802,38 @@
     "route_to_coordinates": false,
     "verified": true,
     "verified_on": "2026-11-18",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%9C%D1%83%D0%B7%D0%B5%D0%B9_%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%9B%D0%B5%D0%B4%D0%B5%D0%BD%D1%86%D0%B0_%D0%B2%D1%8B%D0%B2%D0%B5%D1%81%D0%BA%D0%B0.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/%D0%9C%D1%83%D0%B7%D0%B5%D0%B9_%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%9B%D0%B5%D0%B4%D0%B5%D0%BD%D1%86%D0%B0_%D0%B2%D1%8B%D0%B2%D0%B5%D1%81%D0%BA%D0%B0.jpg/960px-%D0%9C%D1%83%D0%B7%D0%B5%D0%B9_%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%9B%D0%B5%D0%B4%D0%B5%D0%BD%D1%86%D0%B0_%D0%B2%D1%8B%D0%B2%D0%B5%D1%81%D0%BA%D0%B0.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Ta.nyashaa",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "method": "manual",
+        "confirmed": true,
+        "checked_on": "2026-11-19"
+      },
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%9A%D0%BE%D0%BF%D0%B8%D1%8F_%D1%81%D1%82%D0%B0%D1%80%D0%B8%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE_%D1%81%D0%B2%D0%B5%D0%BA%D0%BB%D0%BE%D1%81%D0%B0%D1%85%D0%B0%D1%80%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B7%D0%B0%D0%B2%D0%BE%D0%B4%D0%B0.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/%D0%9A%D0%BE%D0%BF%D0%B8%D1%8F_%D1%81%D1%82%D0%B0%D1%80%D0%B8%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE_%D1%81%D0%B2%D0%B5%D0%BA%D0%BB%D0%BE%D1%81%D0%B0%D1%85%D0%B0%D1%80%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B7%D0%B0%D0%B2%D0%BE%D0%B4%D0%B0.jpg/960px-%D0%9A%D0%BE%D0%BF%D0%B8%D1%8F_%D1%81%D1%82%D0%B0%D1%80%D0%B8%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE_%D1%81%D0%B2%D0%B5%D0%BA%D0%BB%D0%BE%D1%81%D0%B0%D1%85%D0%B0%D1%80%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B7%D0%B0%D0%B2%D0%BE%D0%B4%D0%B0.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Ta.nyashaa",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "method": "manual",
+        "confirmed": true,
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%9C%D1%83%D0%B7%D0%B5%D0%B9_%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%9B%D0%B5%D0%B4%D0%B5%D0%BD%D1%86%D0%B0_%D0%B2%D1%8B%D0%B2%D0%B5%D1%81%D0%BA%D0%B0.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/%D0%9C%D1%83%D0%B7%D0%B5%D0%B9_%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%9B%D0%B5%D0%B4%D0%B5%D0%BD%D1%86%D0%B0_%D0%B2%D1%8B%D0%B2%D0%B5%D1%81%D0%BA%D0%B0.jpg/960px-%D0%9C%D1%83%D0%B7%D0%B5%D0%B9_%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D0%B8_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%9B%D0%B5%D0%B4%D0%B5%D0%BD%D1%86%D0%B0_%D0%B2%D1%8B%D0%B2%D0%B5%D1%81%D0%BA%D0%B0.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Ta.nyashaa",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "method": "manual",
+      "confirmed": true,
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:node:6536736734",
@@ -5957,8 +6027,28 @@
     "route_to_coordinates": false,
     "verified": true,
     "verified_on": "2026-11-18",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan.Musical_theatre.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Ryazan.Musical_theatre.jpg/960px-Ryazan.Musical_theatre.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Максим Шанин",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "confirmed": true,
+        "method": "manual",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Ryazan.Musical_theatre.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Ryazan.Musical_theatre.jpg/960px-Ryazan.Musical_theatre.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Максим Шанин",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "confirmed": true,
+      "method": "manual",
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:node:7156988446",
@@ -7124,8 +7214,48 @@
     "route_to_coordinates": true,
     "verified": true,
     "verified_on": "2026-11-18",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B0%D0%B4_-_1.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B0%D0%B4_-_1.jpg/960px-%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B0%D0%B4_-_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Nikamart",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "method": "manual",
+        "confirmed": true,
+        "checked_on": "2026-11-19"
+      },
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B0%D0%B4_-_2.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B0%D0%B4_-_2.jpg/960px-%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B0%D0%B4_-_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Nikamart",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "method": "manual",
+        "confirmed": true,
+        "checked_on": "2026-11-19"
+      },
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B0%D0%B4_-_3.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B0%D0%B4_-_3.jpg/960px-%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B0%D0%B4_-_3.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Nikamart",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "method": "manual",
+        "confirmed": true,
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B0%D0%B4_-_1.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/27/%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B0%D0%B4_-_1.jpg/960px-%D0%9D%D0%B8%D0%B6%D0%BD%D0%B8%D0%B9_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D1%81%D0%BA%D0%BE%D0%B9_%D1%81%D0%B0%D0%B4_-_1.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Nikamart",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "method": "manual",
+      "confirmed": true,
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:relation:1653398",
@@ -9332,8 +9462,38 @@
     "route_to_coordinates": true,
     "verified": true,
     "verified_on": "2026-11-18",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Lesopark_Ryazan_2024-05_1715344590.tif",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Ryazan_Lesopark_Ryazan_2024-05_1715344590.tif/lossy-page1-960px-Ryazan_Lesopark_Ryazan_2024-05_1715344590.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Artyom Svetlov",
+        "license": "https://creativecommons.org/licenses/by/4.0",
+        "license_label": "CC BY 4.0",
+        "method": "manual",
+        "confirmed": true,
+        "checked_on": "2026-11-19"
+      },
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Lesopark_Ryazan_2024-05_1715344670.tif",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Ryazan_Lesopark_Ryazan_2024-05_1715344670.tif/lossy-page1-960px-Ryazan_Lesopark_Ryazan_2024-05_1715344670.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Artyom Svetlov",
+        "license": "https://creativecommons.org/licenses/by/4.0",
+        "license_label": "CC BY 4.0",
+        "method": "manual",
+        "confirmed": true,
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Lesopark_Ryazan_2024-05_1715344590.tif",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Ryazan_Lesopark_Ryazan_2024-05_1715344590.tif/lossy-page1-960px-Ryazan_Lesopark_Ryazan_2024-05_1715344590.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Artyom Svetlov",
+      "license": "https://creativecommons.org/licenses/by/4.0",
+      "license_label": "CC BY 4.0",
+      "method": "manual",
+      "confirmed": true,
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:way:284834442",
@@ -10340,8 +10500,28 @@
     "route_to_coordinates": false,
     "verified": true,
     "verified_on": "2026-11-18",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Regional_Puppet_Theatre_2024-05_1715337768.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Ryazan_Regional_Puppet_Theatre_2024-05_1715337768.jpg/960px-Ryazan_Regional_Puppet_Theatre_2024-05_1715337768.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Artyom Svetlov",
+        "license": "https://creativecommons.org/licenses/by/4.0",
+        "license_label": "CC BY 4.0",
+        "confirmed": true,
+        "method": "manual",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Ryazan_Regional_Puppet_Theatre_2024-05_1715337768.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Ryazan_Regional_Puppet_Theatre_2024-05_1715337768.jpg/960px-Ryazan_Regional_Puppet_Theatre_2024-05_1715337768.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Artyom Svetlov",
+      "license": "https://creativecommons.org/licenses/by/4.0",
+      "license_label": "CC BY 4.0",
+      "confirmed": true,
+      "method": "manual",
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:way:99470217",
@@ -10890,8 +11070,28 @@
     "verified": true,
     "verified_on": "2026-11-19",
     "osm_license": "https://opendatacommons.org/licenses/odbl/1-0/",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D1%82%D0%B0%D0%B4%D0%B8%D0%BE%D0%BD_%C2%AB%D0%A6%D0%A1%D0%9A%C2%BB_%D0%B2_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B5_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C,_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_-_20100522.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/%D0%A1%D1%82%D0%B0%D0%B4%D0%B8%D0%BE%D0%BD_%C2%AB%D0%A6%D0%A1%D0%9A%C2%BB_%D0%B2_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B5_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%2C_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_-_20100522.jpg/960px-%D0%A1%D1%82%D0%B0%D0%B4%D0%B8%D0%BE%D0%BD_%C2%AB%D0%A6%D0%A1%D0%9A%C2%BB_%D0%B2_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B5_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%2C_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_-_20100522.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "TEMA.RZN .",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "confirmed": true,
+        "method": "manual",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D1%82%D0%B0%D0%B4%D0%B8%D0%BE%D0%BD_%C2%AB%D0%A6%D0%A1%D0%9A%C2%BB_%D0%B2_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B5_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C,_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_-_20100522.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/%D0%A1%D1%82%D0%B0%D0%B4%D0%B8%D0%BE%D0%BD_%C2%AB%D0%A6%D0%A1%D0%9A%C2%BB_%D0%B2_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B5_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%2C_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_-_20100522.jpg/960px-%D0%A1%D1%82%D0%B0%D0%B4%D0%B8%D0%BE%D0%BD_%C2%AB%D0%A6%D0%A1%D0%9A%C2%BB_%D0%B2_%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B5_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%2C_%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F_-_20100522.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "TEMA.RZN .",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0",
+      "license_label": "CC BY-SA 3.0",
+      "confirmed": true,
+      "method": "manual",
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:way:730445020",
@@ -11088,8 +11288,28 @@
     "verified": true,
     "verified_on": "2026-11-19",
     "osm_license": "https://opendatacommons.org/licenses/odbl/1-0/",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C._%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C._%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%BA%D0%BD%D1%8F%D0%B7%D1%8E_%D0%9E%D0%BB%D0%B5%D0%B3%D1%83_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%BC%D1%83._(%D0%90%D0%B2%D1%82%D0%BE%D1%80_%D0%97._%D0%A6%D0%B5%D1%80%D0%B5%D1%82%D0%B5%D0%BB%D0%B8)_-_panoramio.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C._%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C._%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%BA%D0%BD%D1%8F%D0%B7%D1%8E_%D0%9E%D0%BB%D0%B5%D0%B3%D1%83_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%BC%D1%83._%28%D0%90%D0%B2%D1%82%D0%BE%D1%80_%D0%97._%D0%A6%D0%B5%D1%80%D0%B5%D1%82%D0%B5%D0%BB%D0%B8%29_-_panoramio.jpg/960px-%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C._%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C._%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%BA%D0%BD%D1%8F%D0%B7%D1%8E_%D0%9E%D0%BB%D0%B5%D0%B3%D1%83_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%BC%D1%83._%28%D0%90%D0%B2%D1%82%D0%BE%D1%80_%D0%97._%D0%A6%D0%B5%D1%80%D0%B5%D1%82%D0%B5%D0%BB%D0%B8%29_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Natalia Semenova",
+        "license": "https://creativecommons.org/licenses/by/3.0",
+        "license_label": "CC BY 3.0",
+        "confirmed": true,
+        "method": "manual",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C._%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C._%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%BA%D0%BD%D1%8F%D0%B7%D1%8E_%D0%9E%D0%BB%D0%B5%D0%B3%D1%83_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%BC%D1%83._(%D0%90%D0%B2%D1%82%D0%BE%D1%80_%D0%97._%D0%A6%D0%B5%D1%80%D0%B5%D1%82%D0%B5%D0%BB%D0%B8)_-_panoramio.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/15/%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C._%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C._%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%BA%D0%BD%D1%8F%D0%B7%D1%8E_%D0%9E%D0%BB%D0%B5%D0%B3%D1%83_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%BC%D1%83._%28%D0%90%D0%B2%D1%82%D0%BE%D1%80_%D0%97._%D0%A6%D0%B5%D1%80%D0%B5%D1%82%D0%B5%D0%BB%D0%B8%29_-_panoramio.jpg/960px-%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C._%D0%A1%D0%BE%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C._%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%BA%D0%BD%D1%8F%D0%B7%D1%8E_%D0%9E%D0%BB%D0%B5%D0%B3%D1%83_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%BC%D1%83._%28%D0%90%D0%B2%D1%82%D0%BE%D1%80_%D0%97._%D0%A6%D0%B5%D1%80%D0%B5%D1%82%D0%B5%D0%BB%D0%B8%29_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Natalia Semenova",
+      "license": "https://creativecommons.org/licenses/by/3.0",
+      "license_label": "CC BY 3.0",
+      "confirmed": true,
+      "method": "manual",
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:node:1252222263",
@@ -11462,8 +11682,28 @@
     "verified": true,
     "verified_on": "2026-11-19",
     "osm_license": "https://opendatacommons.org/licenses/odbl/1-0/",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D1%81%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%B0%D0%BC_%D0%A0%D0%BE%D1%81%D0%B3%D0%B2%D0%B0%D1%80%D0%B4%D0%B8%D0%B8.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D1%81%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%B0%D0%BC_%D0%A0%D0%BE%D1%81%D0%B3%D0%B2%D0%B0%D1%80%D0%B4%D0%B8%D0%B8.jpg/960px-%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D1%81%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%B0%D0%BC_%D0%A0%D0%BE%D1%81%D0%B3%D0%B2%D0%B0%D1%80%D0%B4%D0%B8%D0%B8.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Kobylinka62",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "confirmed": true,
+        "method": "manual",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D1%81%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%B0%D0%BC_%D0%A0%D0%BE%D1%81%D0%B3%D0%B2%D0%B0%D1%80%D0%B4%D0%B8%D0%B8.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D1%81%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%B0%D0%BC_%D0%A0%D0%BE%D1%81%D0%B3%D0%B2%D0%B0%D1%80%D0%B4%D0%B8%D0%B8.jpg/960px-%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D1%81%D0%BE%D1%82%D1%80%D1%83%D0%B4%D0%BD%D0%B8%D0%BA%D0%B0%D0%BC_%D0%A0%D0%BE%D1%81%D0%B3%D0%B2%D0%B0%D1%80%D0%B4%D0%B8%D0%B8.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Kobylinka62",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "confirmed": true,
+      "method": "manual",
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:node:1248146889",
@@ -11748,8 +11988,28 @@
     "verified": true,
     "verified_on": "2026-11-19",
     "osm_license": "https://opendatacommons.org/licenses/odbl/1-0/",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%91%D1%8E%D1%81%D1%82_%D0%9C.%D0%95.%D0%A1%D0%B0%D0%BB%D1%82%D1%8B%D0%BA%D0%BE%D0%B2%D0%B0-%D0%A9%D0%B5%D0%B4%D1%80%D0%B8%D0%BD%D0%B0_(%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/%D0%91%D1%8E%D1%81%D1%82_%D0%9C.%D0%95.%D0%A1%D0%B0%D0%BB%D1%82%D1%8B%D0%BA%D0%BE%D0%B2%D0%B0-%D0%A9%D0%B5%D0%B4%D1%80%D0%B8%D0%BD%D0%B0_%28%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%29.jpg/960px-%D0%91%D1%8E%D1%81%D1%82_%D0%9C.%D0%95.%D0%A1%D0%B0%D0%BB%D1%82%D1%8B%D0%BA%D0%BE%D0%B2%D0%B0-%D0%A9%D0%B5%D0%B4%D1%80%D0%B8%D0%BD%D0%B0_%28%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Kobylinka62",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "confirmed": true,
+        "method": "manual",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%91%D1%8E%D1%81%D1%82_%D0%9C.%D0%95.%D0%A1%D0%B0%D0%BB%D1%82%D1%8B%D0%BA%D0%BE%D0%B2%D0%B0-%D0%A9%D0%B5%D0%B4%D1%80%D0%B8%D0%BD%D0%B0_(%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c0/%D0%91%D1%8E%D1%81%D1%82_%D0%9C.%D0%95.%D0%A1%D0%B0%D0%BB%D1%82%D1%8B%D0%BA%D0%BE%D0%B2%D0%B0-%D0%A9%D0%B5%D0%B4%D1%80%D0%B8%D0%BD%D0%B0_%28%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%29.jpg/960px-%D0%91%D1%8E%D1%81%D1%82_%D0%9C.%D0%95.%D0%A1%D0%B0%D0%BB%D1%82%D1%8B%D0%BA%D0%BE%D0%B2%D0%B0-%D0%A9%D0%B5%D0%B4%D1%80%D0%B8%D0%BD%D0%B0_%28%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%8C%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Kobylinka62",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "confirmed": true,
+      "method": "manual",
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:node:1317023885",
@@ -12056,8 +12316,28 @@
     "verified": true,
     "verified_on": "2026-11-19",
     "osm_license": "https://opendatacommons.org/licenses/odbl/1-0/",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:Scobelevmonument.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Scobelevmonument.jpg/960px-Scobelevmonument.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "VadimK55555",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "confirmed": true,
+        "method": "manual",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:Scobelevmonument.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Scobelevmonument.jpg/960px-Scobelevmonument.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "VadimK55555",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0",
+      "license_label": "CC BY-SA 3.0",
+      "confirmed": true,
+      "method": "manual",
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:node:1351831837",
@@ -12386,8 +12666,28 @@
     "verified": true,
     "verified_on": "2026-11-19",
     "osm_license": "https://opendatacommons.org/licenses/odbl/1-0/",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%BE%D0%BF%D0%BE%D0%B2%D1%83_.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%BE%D0%BF%D0%BE%D0%B2%D1%83_.jpg/960px-%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%BE%D0%BF%D0%BE%D0%B2%D1%83_.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Killerfrost21",
+        "license": "https://creativecommons.org/licenses/by-sa/4.0",
+        "license_label": "CC BY-SA 4.0",
+        "confirmed": true,
+        "method": "manual",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%BE%D0%BF%D0%BE%D0%B2%D1%83_.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%BE%D0%BF%D0%BE%D0%B2%D1%83_.jpg/960px-%D0%9F%D0%B0%D0%BC%D1%8F%D1%82%D0%BD%D0%B8%D0%BA_%D0%9F%D0%BE%D0%BF%D0%BE%D0%B2%D1%83_.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Killerfrost21",
+      "license": "https://creativecommons.org/licenses/by-sa/4.0",
+      "license_label": "CC BY-SA 4.0",
+      "confirmed": true,
+      "method": "manual",
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:node:2016251210",
@@ -14124,8 +14424,28 @@
     "verified": true,
     "verified_on": "2026-11-19",
     "osm_license": "https://opendatacommons.org/licenses/odbl/1-0/",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "source": "https://commons.wikimedia.org/wiki/File:%D0%97%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%BD%D0%BE%D0%B9_%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8_%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8_%D0%93%D0%BE%D1%80%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/%D0%97%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%BD%D0%BE%D0%B9_%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8_%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8_%D0%93%D0%BE%D1%80%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE.jpg/960px-%D0%97%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%BD%D0%BE%D0%B9_%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8_%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8_%D0%93%D0%BE%D1%80%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Andrey Mironov",
+        "license": "https://creativecommons.org/licenses/by-sa/3.0",
+        "license_label": "CC BY-SA 3.0",
+        "confirmed": true,
+        "method": "manual",
+        "checked_on": "2026-11-19"
+      }
+    ],
+    "photo": {
+      "source": "https://commons.wikimedia.org/wiki/File:%D0%97%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%BD%D0%BE%D0%B9_%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8_%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8_%D0%93%D0%BE%D1%80%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/%D0%97%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%BD%D0%BE%D0%B9_%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8_%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8_%D0%93%D0%BE%D1%80%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE.jpg/960px-%D0%97%D0%B4%D0%B0%D0%BD%D0%B8%D0%B5_%D0%A0%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%BE%D0%B9_%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D0%BD%D0%BE%D0%B9_%D0%B1%D0%B8%D0%B1%D0%BB%D0%B8%D0%BE%D1%82%D0%B5%D0%BA%D0%B8_%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8_%D0%93%D0%BE%D1%80%D1%8C%D0%BA%D0%BE%D0%B3%D0%BE.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Andrey Mironov",
+      "license": "https://creativecommons.org/licenses/by-sa/3.0",
+      "license_label": "CC BY-SA 3.0",
+      "confirmed": true,
+      "method": "manual",
+      "checked_on": "2026-11-19"
+    }
   },
   {
     "id": "osm:relation:1608246",
