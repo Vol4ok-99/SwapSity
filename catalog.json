@@ -8377,8 +8377,22 @@
     "verified": true,
     "verified_on": "2026-11-19",
     "osm_license": "https://opendatacommons.org/licenses/odbl/1-0/",
-    "gallery": [],
-    "photo": null
+    "gallery": [
+      {
+        "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Church_of_the_Epiphany_Ryazan9.JPG?width=960",
+        "author": "Dr Jorgen",
+        "source": "https://commons.wikimedia.org/wiki/File:Church_of_the_Epiphany_Ryazan9.JPG",
+        "license": "https://commons.wikimedia.org/wiki/File:Church_of_the_Epiphany_Ryazan9.JPG#Licensing",
+        "license_label": "Public domain"
+      }
+    ],
+    "photo": {
+      "url": "https://commons.wikimedia.org/wiki/Special:FilePath/Church_of_the_Epiphany_Ryazan9.JPG?width=960",
+      "author": "Dr Jorgen",
+      "source": "https://commons.wikimedia.org/wiki/File:Church_of_the_Epiphany_Ryazan9.JPG",
+      "license": "https://commons.wikimedia.org/wiki/File:Church_of_the_Epiphany_Ryazan9.JPG#Licensing",
+      "license_label": "Public domain"
+    }
   },
   {
     "id": "osm:way:109731639",
